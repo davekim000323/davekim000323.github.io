@@ -1,0 +1,1094 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Dave Kim</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300&family=Hanken+Grotesk:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+*{scrollbar-width:none}*::-webkit-scrollbar{display:none}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0D0C0A;--mid:#141210;--lift:#1E1B18;--blue:#2774AE;--gold:#FFD100;--border:rgba(255,255,255,.1);--text:#F4F1E9;--sub:rgba(244,241,233,.72);--muted:rgba(244,241,233,.46);--nav-h:50px}
+body.light{--bg:#F2F1EB;--mid:#ECEAE2;--lift:#E3E0D6;--border:rgba(0,0,0,.12);--text:#0B0B09;--sub:rgba(11,11,9,.88);--muted:rgba(11,11,9,.56)}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-y:auto;transition:background .3s,color .3s}
+body.light .mech-drawing .tendon{stroke:var(--text)!important}
+body.light .mech-drawing .spring{stroke:var(--text)!important}
+body.light .mech-drawing .out-node{stroke:var(--text)!important}
+#ch,#cv{position:fixed;z-index:9999;pointer-events:none;background:var(--gold)}
+#ch{height:1px;width:16px;transform:translate(-50%,-50%);transition:width .16s}
+#cv{width:1px;height:16px;transform:translate(-50%,-50%);transition:height .16s}
+body.hov #ch{width:26px}body.hov #cv{height:26px}body.light #ch,body.light #cv{background:var(--text)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:400;height:var(--nav-h);display:flex;align-items:center;padding:0 36px;justify-content:flex-end;background:rgba(13,12,10,.88);backdrop-filter:blur(20px);transition:background .3s}
+nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--blue),var(--gold))}
+body.light nav{background:rgba(242,241,235,.95)}
+.nav-right{display:flex;align-items:center}.nav-links{display:flex;list-style:none}
+.nav-links a{font-size:12px;color:var(--sub);letter-spacing:.04em;text-decoration:none;padding:6px 13px;transition:color .2s}.nav-links a:hover{color:var(--gold)}
+.tbtn{background:none;border:none;cursor:pointer;color:var(--muted);padding:6px 8px;display:flex;align-items:center;transition:color .15s;margin-left:6px}.tbtn:hover{color:var(--text)}
+/* HERO */
+#hero{padding-top:var(--nav-h);min-height:100svh;height:auto;display:flex;flex-direction:column}
+.zone-hero{flex:1;display:flex;flex-direction:column;min-height:0}
+.hero-name-row{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;height:160px;padding:0 38px;position:relative;z-index:1;opacity:0;animation:fu .72s .06s cubic-bezier(.16,1,.3,1) forwards}
+.hero-name-row::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:48px 48px}
+body.light .hero-name-row::after{background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px)}
+.hero-name{font-family:'Fraunces',serif;font-size:clamp(40px,5.4vw,76px);font-weight:400;line-height:1;letter-spacing:-.04em;color:var(--text);white-space:nowrap}
+.name-hy{font-size:.47em;font-style:italic;font-weight:200;color:var(--sub);letter-spacing:-.02em;margin:0 .32em}
+.mech-drawing{flex-shrink:0;opacity:1;transition:opacity .3s}.mech-drawing:hover{opacity:1}
+.rule-main{flex-shrink:0;height:1px;background:var(--border)}
+/* CONTENT ROW */
+.hero-content-row{flex:1;display:grid;grid-template-columns:320px 1fr;min-height:0;border-bottom:1px solid var(--border)}
+.col-photo{border-right:1px solid var(--border);overflow:hidden;opacity:0;animation:fi .55s .22s forwards}
+.col-photo img{width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:grayscale(8%) brightness(.88);transition:filter .8s;display:block}
+body.light .col-photo img{filter:grayscale(4%) brightness(1)}.col-photo:hover img{filter:grayscale(0%) brightness(.95)}
+.col-right{display:flex;flex-direction:column;min-height:0}
+.col-info{flex:1;padding:28px 36px;display:flex;align-items:center;opacity:0;animation:fu .65s .28s cubic-bezier(.16,1,.3,1) forwards}
+.info-inner{display:flex;flex-direction:column;width:100%}
+.status-line{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.status-pip{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.status-text{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--gold)}
+body.light .status-text,.status-loc{color:var(--gold)}
+body.light .status-text{color:var(--text)}
+.s-pipe{color:var(--gold);font-size:13px;font-family:'DM Mono',monospace;opacity:.8;margin:0 1px}
+.status-loc{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+body.light .status-loc{color:var(--text)}
+.bio{font-size:15px;font-weight:300;color:var(--sub);line-height:1.84}
+.bio+.bio{margin-top:10px}
+.bio-link{color:var(--sub);text-decoration:none;transition:color .18s}.bio-link:hover{color:var(--blue)}
+.links{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px;justify-content:center;align-self:center}
+.lnk{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:7px 14px;letter-spacing:.02em;position:relative;overflow:hidden;transition:border-color .22s,color .22s}
+.lnk::before{content:'';position:absolute;inset:0;background:rgba(39,116,174,.05);transform:translateX(-101%);transition:transform .28s cubic-bezier(.16,1,.3,1)}
+.lnk>*{position:relative}.lnk:hover{border-color:rgba(39,116,174,.45);color:var(--blue)}.lnk:hover::before{transform:translateX(0)}
+/* BOTTOM STRIP — 3-band: news(1fr) | edu(2fr) */
+.zone-edu{flex-shrink:0;height:auto;display:grid;grid-template-columns:1fr 2fr;background:var(--mid);border-top:1px solid var(--border);opacity:0;animation:fu .6s .5s cubic-bezier(.16,1,.3,1) forwards}
+/* news card */
+.news-card{padding:0 22px 0;border-right:1px solid var(--border);display:flex;flex-direction:column;height:100%;overflow:hidden}.news-body{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;margin:0 -22px 0;padding:0 22px 14px;transition:background .22s}.news-body:hover{background:var(--lift)}.news-body::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1)}body.light .news-body::after{background:var(--text)}.news-body:hover::after{transform:scaleX(1)}
+.strip-label{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;flex-shrink:0}
+.news-list{display:flex;flex-direction:column;gap:7px;overflow-y:auto;flex:1;min-height:0}
+.news-item{display:flex;gap:10px;align-items:baseline}
+.news-date{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--text);white-space:nowrap;flex-shrink:0}
+body.light .news-date{color:var(--text)}
+.news-text{font-size:11px;font-weight:300;color:var(--sub);line-height:1.4}
+/* edu card — internal 2-col */
+.edu-card{display:flex;flex-direction:column;overflow:hidden}
+.edu-inner{flex:1;display:grid;grid-template-columns:1fr 1fr}
+.edu-col{padding:8px 22px 14px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-start;position:relative;overflow:hidden;transition:background .22s}.edu-col:last-child{border-right:none}.edu-col:hover{background:var(--lift)}.edu-col::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1)}body.light .edu-col::after{background:var(--text)}.edu-col:hover::after{transform:scaleX(1)}
+.edu-period{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.edu-degree{font-family:'Fraunces',serif;font-size:15px;font-weight:400;line-height:1.25;margin-bottom:4px;color:var(--text)}
+.edu-school{font-size:11px;font-weight:500;color:var(--sub);margin-bottom:4px}
+.edu-note{font-size:11px;font-weight:300;color:var(--muted);line-height:1.5;margin-bottom:2px}
+.etag-row{display:flex;align-items:center;gap:8px;margin-top:5px}
+.etag{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;color:var(--blue);background:rgba(39,116,174,.13);white-space:nowrap}
+body.light .etag{color:var(--text);background:rgba(11,11,9,.07)}
+/* INTERESTS */
+.zone-interests{flex-shrink:0;height:auto;display:flex;flex-direction:column;background:var(--bg);border-top:1px solid var(--border);opacity:0;animation:fu .6s .74s cubic-bezier(.16,1,.3,1) forwards}
+.int-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr)}
+.int-cell{padding:18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:background .22s;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center}
+.int-cell:last-child{border-right:none}.int-cell:hover{background:var(--lift)}
+.int-cell::before{content:attr(data-n);position:absolute;right:10px;bottom:-6px;font-family:'Fraunces',serif;font-size:80px;font-weight:400;line-height:1;color:rgba(255,255,255,.04);pointer-events:none;user-select:none;transition:color .22s,transform .3s}
+body.light .int-cell::before{color:rgba(0,0,0,.04)}.int-cell:hover::before{color:rgba(255,255,255,.09);transform:translateY(-3px)}
+.int-cell::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+body.light .int-cell::after{background:var(--text)}.int-cell:hover::after{transform:scaleX(1)}
+.int-icon{width:32px;height:32px;margin-bottom:10px;color:var(--muted);flex-shrink:0}
+.int-cell:hover .int-icon{color:var(--sub)}
+.int-index{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.int-label{font-family:'Fraunces',serif;font-size:15px;font-weight:400;line-height:1.35;color:var(--text)}
+/* SECTIONS */
+.section{padding:56px 0;border-top:1px solid var(--border)}
+#research{border-top:none}
+.section-inner{max-width:1160px;margin:0 auto;padding:0 48px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(24px,3vw,40px);font-weight:400;color:var(--text);line-height:1;margin-bottom:32px;letter-spacing:-.02em}
+/* PAPER CARDS */
+.paper-card{display:grid;grid-template-columns:300px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--border);align-items:stretch}
+.paper-card:last-child{border-bottom:none}
+.paper-left{display:flex;flex-direction:column;justify-content:flex-start}
+.paper-thumb{aspect-ratio:16/9;background:var(--lift);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);overflow:hidden;transition:box-shadow .25s}
+.paper-left:hover .paper-thumb{box-shadow:0 0 0 1px rgba(255,209,0,.45),0 0 24px rgba(255,209,0,.12)}
+.paper-thumb-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:.35}
+.paper-thumb-ph span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.paper-icons{display:flex;gap:22px;padding:10px 2px 4px;border-top:1px solid var(--border);justify-content:center}
+.pi{display:flex;align-items:center;gap:8px;color:var(--text);opacity:1}
+.pi svg{height:22px;width:auto}
+.pi span{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em}
+.paper-info{display:flex;flex-direction:column}
+.venue-tag{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;background:rgba(39,116,174,.18);color:var(--blue);width:fit-content;line-height:1.5}
+.venue-tags{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:12px}
+body.light .venue-tag{background:rgba(11,11,9,.08);color:var(--text)}
+.paper-title{font-family:'Fraunces',serif;font-size:17px;font-weight:400;line-height:1.45;color:var(--text);margin-bottom:8px}
+.paper-authors{font-size:12.5px;font-weight:300;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.paper-authors em{color:var(--sub);font-style:normal}
+.paper-abstract{font-size:13px;font-weight:300;color:var(--sub);line-height:1.75;margin-bottom:16px}
+.paper-btns{display:flex;gap:8px}
+.pbtn{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);color:var(--muted);text-decoration:none;cursor:pointer;background:none;transition:border-color .2s,color .2s}
+.pbtn:hover{border-color:rgba(255,209,0,.5);color:var(--gold)}
+.abs-text{display:none;margin-top:12px;font-size:12.5px;font-weight:300;color:var(--sub);line-height:1.75;border-left:2px solid var(--border);padding-left:14px}
+/* PROJECTS */
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.proj-card{background:var(--lift);border:1px solid var(--border);overflow:hidden;transition:border-color .22s,transform .22s}
+.proj-card:hover{border-color:rgba(255,209,0,.3);transform:translateY(-3px)}
+.proj-thumb{aspect-ratio:16/9;background:var(--mid);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);color:var(--muted)}
+.proj-thumb-ph{display:flex;align-items:center;justify-content:center;opacity:.28}
+.proj-body{padding:18px 20px}
+.proj-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.proj-title{font-family:'Fraunces',serif;font-size:16px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.3}
+.proj-title-link{color:inherit;text-decoration:none;transition:color .18s}.proj-title-link:hover{color:var(--blue)}
+.proj-desc{font-size:12.5px;font-weight:300;color:var(--sub);line-height:1.65}
+.proj-awards{margin-top:12px}
+.proj-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.proj-tool{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.06em;padding:2px 7px;border:1px solid var(--border);color:var(--muted)}
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border)}
+.sg{padding:22px 26px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;transition:background .22s,box-shadow .22s}.sg:hover{background:var(--lift);box-shadow:inset 0 0 0 1.5px rgba(255,209,0,.55)}body.light .sg:hover{box-shadow:inset 0 0 0 1.5px rgba(11,11,9,.35)}
+.sg:nth-child(3n){border-right:none}.sg:nth-last-child(-n+3){border-bottom:none}
+.sg-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+body.light .sg-label{color:var(--text)}
+.sk-tags{display:flex;flex-wrap:wrap;gap:6px}
+.sk{font-size:12px;font-weight:300;color:var(--sub);background:var(--mid);padding:4px 10px;border:1px solid var(--border)}
+/* AWARDS */
+.award-list{display:flex;flex-direction:column}
+.award-item{display:grid;grid-template-columns:150px 1fr 240px;align-items:center;padding:18px 0;border-bottom:1px solid var(--border);gap:24px}
+.award-item:first-child{border-top:1px solid var(--border)}
+.award-year{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.award-name{font-family:'Fraunces',serif;font-size:16px;font-weight:400;color:var(--text);line-height:1.3}
+.award-sub{font-size:12px;font-weight:300;color:var(--muted);margin-top:3px}
+.award-org{font-size:12px;font-weight:300;color:var(--muted);text-align:right}
+
+/* ===== Added: mouse-only crosshair ===== */
+@media (hover:hover) and (pointer:fine){body{cursor:none}a,button{cursor:none}}
+@media (hover:none),(pointer:coarse){#ch,#cv{display:none}}
+.news-list{max-height:150px;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent);padding-bottom:18px}
+/* photo settles into place */
+.col-photo{cursor:pointer}
+.col-photo img{transform:scale(1.045) translate(-7px,5px);transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .8s}
+.col-photo:hover img,.col-photo.set img{transform:none}
+/* collaborator call */
+.collab{margin-top:12px;padding:8px 14px;border-left:2px solid var(--gold);background:rgba(255,209,0,.05);font-size:13.5px;color:var(--sub);line-height:1.6}
+.collab b{display:block;font-family:'DM Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.14em;color:var(--gold);margin-bottom:2px}
+.collab a{color:var(--text);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+body.light .collab{border-left-color:var(--text);background:rgba(11,11,9,.04)}
+body.light .collab b{color:var(--text)}
+/* status tags */
+.venue-tag.pending{background:rgba(244,241,233,.07);color:var(--muted)}
+.venue-tag.live{background:rgba(255,209,0,.1);color:var(--gold);display:inline-flex;align-items:center;gap:7px}
+.venue-tag.live::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 2.2s ease-in-out infinite}
+body.light .venue-tag.pending{background:rgba(11,11,9,.06)}
+body.light .venue-tag.live{background:rgba(11,11,9,.08);color:var(--text)}
+@keyframes blink{50%{opacity:.25}}
+/* RT-Joints figure: render, hover to change pose, LIVE for a minimal finger */
+.rtj-thumb{position:relative;background:radial-gradient(ellipse 70% 80% at 50% 45%,#77746e 0%,#3a3733 48%,#1E1B18 100%)}
+body.light .rtj-thumb{background:radial-gradient(ellipse 70% 80% at 50% 45%,#ffffff 0%,#dcd9d0 60%,#cfccc2 100%)}
+.rtj-thumb img{position:absolute;left:0;right:0;top:5%;height:90%;width:100%;object-fit:contain;transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.rtj-thumb .r2{opacity:0;transform:scale(.96)}
+.paper-left:hover .rtj-thumb:not(.live) .r1{opacity:0;transform:scale(1.03)}
+.paper-left:hover .rtj-thumb:not(.live) .r2{opacity:1;transform:none}
+.rtj-live{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;background-color:var(--bg);background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:16px 16px}
+body.light .rtj-live{background-image:linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px)}
+.rtj-thumb.live .rtj-live{opacity:1;pointer-events:auto}
+.rtj-thumb.live img{opacity:0}
+.rtj-live svg{width:100%;height:100%;display:block;touch-action:pan-y}
+.rtj-mode{position:absolute;top:8px;right:8px;z-index:3;display:flex;border:1px solid var(--border);background:rgba(13,12,10,.72)}
+body.light .rtj-mode{background:rgba(242,241,235,.8)}
+.rtj-mode button{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;padding:4px 8px;border:0;background:none;color:var(--muted);transition:color .2s}
+.rtj-mode button[aria-pressed="true"]{color:var(--gold)}
+body.light .rtj-mode button[aria-pressed="true"]{color:var(--text)}
+.rtj-read{position:absolute;left:10px;bottom:7px;font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--muted);pointer-events:none}
+.rtj-read b{color:var(--gold);font-weight:400}
+body.light .rtj-read b{color:var(--text)}
+.sub-group .paper-card:last-child{border-bottom:none}
+.sub-head{display:flex;align-items:baseline;gap:12px;margin:44px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text)}
+.sub-head:first-of-type{margin-top:6px}
+.sub-head small{font-size:10.5px;letter-spacing:.1em;color:var(--muted)}
+body.light .sub-head{color:var(--text)}
+.paper-card.feat{grid-template-columns:400px 1fr}
+@media (max-width:1100px){.paper-card.feat{grid-template-columns:300px 1fr}}
+@media (max-width:800px){.paper-card.feat{grid-template-columns:1fr}}
+/* first screen ends at the bottom of the photo and education strip */
+@media (min-width:801px){
+  #hero{min-height:0!important}
+  .zone-hero{flex:none!important;min-height:calc(100svh - var(--nav-h))}
+  .hero-content-row{flex:1}
+  .hero-name-row{height:140px}
+  .col-info{padding-top:20px;padding-bottom:20px}
+}
+/* ===== Life ===== */
+.life-grid{display:grid;grid-template-columns:1fr 1.15fr 1.15fr;border:1px solid var(--border)}
+.lc{display:flex;flex-direction:column;text-align:center;padding:22px 24px 24px;border-right:1px solid var(--border);position:relative;transition:background .22s,box-shadow .22s;min-width:0}
+.lc:last-child{border-right:none}
+.lc:hover{background:var(--lift);box-shadow:inset 0 0 0 1.5px rgba(255,209,0,.45)}
+body.light .lc:hover{box-shadow:inset 0 0 0 1.5px rgba(11,11,9,.3)}
+.lc .sg-label{margin-bottom:14px}
+.lc-big{font-family:'Fraunces',serif;font-size:20px;font-weight:400;line-height:1.25}
+.lc-sub{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+.pitch{display:block;width:100%;max-width:250px;margin:auto;padding:16px 0 8px;color:var(--text)}
+.pitch .ln{fill:none;stroke:currentColor;stroke-width:1;opacity:.22}
+.pitch .pos{fill:var(--bg);stroke:currentColor;stroke-width:1.1;opacity:.6;transition:opacity .2s}
+.pitch g:hover .pos{opacity:1}
+.pitch .me{fill:var(--gold);stroke:var(--gold);opacity:1}
+.pitch .ring{fill:none;stroke:var(--gold);stroke-width:1;transform-box:fill-box;transform-origin:center;animation:ring 2.4s ease-out infinite}
+.pitch .num{font-family:'DM Mono',monospace;font-size:7px;fill:#0D0C0A;text-anchor:middle;dominant-baseline:central}
+body.light .pitch .me,body.light .pitch .ring{fill:var(--text);stroke:var(--text)}
+body.light .pitch .ring{fill:none}
+body.light .pitch .num{fill:var(--bg)}
+@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.pitch-cap{text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.tracks-wrap{position:relative;flex:1;min-height:260px}
+.tracklist{position:absolute;inset:0;list-style:none;display:flex;flex-direction:column;text-align:left;overflow-y:auto;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent);padding-bottom:22px}
+.list-hint{display:block;margin-top:6px;font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:var(--muted)}
+.tracklist li a,.tracklist li span.row{display:grid;grid-template-columns:24px 1fr 18px;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+.tracklist li:last-child a,.tracklist li:last-child span.row{border-bottom:none}
+.tr-i{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted)}
+.tr-t{font-size:14px;line-height:1.3;min-width:0}
+.tr-t small{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+.eq{display:flex;align-items:flex-end;gap:2px;height:12px;opacity:0;transition:opacity .2s}
+.eq i{width:3px;background:var(--gold);height:30%;animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+body.light .eq i{background:var(--text)}
+.tracklist li:hover .eq{opacity:1}
+.tracklist li:hover .tr-i{color:var(--gold)}
+body.light .tracklist li:hover .tr-i{color:var(--text)}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.reel{flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:1fr;gap:14px 10px;text-align:left;padding:4px 0 0}
+.reel .film:nth-child(-n+3){grid-column:span 2}.reel .film:nth-child(n+4){grid-column:span 3}
+.film{min-width:0;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.film-frame{position:relative;flex:1;min-height:150px;background:var(--mid);border:1px solid var(--border);padding:10px 0;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.film-frame::before,.film-frame::after{content:'';position:absolute;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,transparent 0 4px,var(--border) 4px 9px);z-index:2}
+.film-frame::before{top:2px}.film-frame::after{bottom:2px}
+.film-frame .film-poster{position:absolute;inset:10px 0;width:100%;height:calc(100% - 20px);object-fit:cover;object-position:center 30%;z-index:1}
+.film-ph{position:absolute;inset:10px 0;display:flex;align-items:flex-end;padding:8px;font-family:'Fraunces',serif;font-size:13px;line-height:1.2;background:linear-gradient(160deg,var(--c1,#2774AE),var(--c2,#141210))}
+.film:hover .film-frame{transform:translateY(-4px);border-color:rgba(255,209,0,.5)}
+body.light .film:hover .film-frame{border-color:rgba(11,11,9,.4)}
+.film-cap{font-size:12.5px;margin-top:7px;line-height:1.3;flex:none}
+.film-cap span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:2.6em}
+.film-cap small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.film-cap small{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
+@media (max-width:1100px){.life-grid{grid-template-columns:1fr 1fr}.lc:nth-child(2){border-right:none}.lc:nth-child(-n+2){border-bottom:1px solid var(--border)}.lc:last-child{grid-column:1/-1}.reel{grid-template-columns:repeat(5,minmax(0,1fr))}.reel .film:nth-child(n){grid-column:auto}}
+@media (max-width:800px){.life-grid{grid-template-columns:1fr}.reel{grid-template-columns:repeat(6,minmax(0,1fr))}.reel .film:nth-child(-n+3){grid-column:span 2}.reel .film:nth-child(n+4){grid-column:span 3}.lc:first-child{grid-row:auto}.lc{border-right:none!important;border-bottom:1px solid var(--border)}.lc:last-child{border-bottom:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+
+
+
+
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+
+/* ── Slightly reduced / Mac (~1100-1300px) ── */
+@media (max-width:1300px){
+  .section-inner{padding:0 32px}
+  .paper-card{grid-template-columns:200px 1fr;gap:18px}
+}
+
+/* ── 2/3 screen: unlock hero height, keep strip compact ── */
+@media (max-width:1100px){
+  #hero{height:auto;min-height:100svh}
+  .zone-hero{flex:none}
+  .hero-content-row{grid-template-columns:180px 1fr;min-height:0}
+  .col-photo img{object-fit:cover;object-position:center 10%;height:100%}
+  /* Edu strip: fixed compact height */
+  .zone-edu{height:auto!important}
+  .edu-col{padding:10px 14px;overflow:hidden;height:100%}
+  .edu-degree{font-size:13.5px}
+  .edu-school{font-size:11px}
+  .edu-note{font-size:10px}
+  .etag{font-size:8.5px;padding:2px 6px}
+  .zone-interests{height:auto}
+  .int-cell{padding:10px 6px}
+  .paper-card{grid-template-columns:180px 1fr;gap:16px}
+  .project-grid{grid-template-columns:repeat(2,1fr)}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .sg:nth-child(3n){border-right:1px solid var(--border)}
+  .sg:nth-child(2n){border-right:none}
+  .sg:nth-last-child(-n+3){border-bottom:1px solid var(--border)}
+  .sg:nth-last-child(-n+2){border-bottom:none}
+  .award-item{grid-template-columns:110px 1fr;gap:14px}
+  .award-org{display:none}
+}
+
+/* ── Stacked layout (≤800px) ── */
+@media (max-width:800px){
+  #hero{height:auto;min-height:100svh}
+  .zone-hero{flex:none}
+  .hero-name-row{height:auto;padding:16px 20px;flex-wrap:wrap;gap:12px}
+  .mech-drawing{width:clamp(120px,26vw,160px)!important}
+  .hero-name{font-size:clamp(26px,5vw,46px)}
+
+  .hero-content-row{grid-template-columns:1fr}
+
+  /* Photo: smaller, full image visible, no crop */
+  .col-photo{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+    height:200px;
+    overflow:hidden;
+    background:var(--mid)
+  }
+  .col-photo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center top;
+    display:block
+  }
+
+  .col-info{padding:16px 20px}
+
+  /* Edu strip: news top full-width, edu-card below full-width
+     news and edu-card are the SAME height (auto, grow to match each other) */
+  .zone-edu{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto;
+    height:auto!important;
+    overflow:visible!important
+  }
+  .news-card{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+    padding:10px 18px;
+    /* Let it grow to match edu-card height */
+    height:auto;
+    overflow:hidden
+  }
+  .news-list{overflow-y:auto}
+  .edu-card{width:100%;height:auto!important}
+  .strip-label{padding:10px 22px 0!important}
+  .edu-inner{grid-template-columns:1fr 1fr!important;height:auto}
+  .edu-col{padding:10px 16px;overflow:visible!important;height:auto!important}
+  .edu-degree{font-size:13px;word-break:break-word}
+  .edu-school{font-size:10.5px}
+  .edu-note{font-size:10px}
+  .etag{font-size:8.5px;padding:2px 6px;white-space:normal}
+
+  .zone-interests{height:auto!important}
+  .int-cell{min-height:90px;padding:10px 6px}
+  .paper-card{grid-template-columns:150px 1fr;gap:14px}
+  .section-inner{padding:0 20px}
+  .section-title{font-size:clamp(20px,3.5vw,30px)}
+}
+
+/* ── Narrow (≤620px) ── */
+@media (max-width:620px){
+  nav{padding:0 12px}
+  .nav-links a{font-size:11px;padding:4px 7px}
+  .nav-links .opt{display:none}
+  .hero-name-row{padding:12px 14px}
+  .hero-name{font-size:clamp(22px,7vw,34px)}
+  .mech-drawing{display:none}
+  .col-info{padding:12px 14px}
+  .bio{font-size:12.5px;line-height:1.7}
+
+  /* Photo: smaller, full image, NO crop */
+  .col-photo{
+    height:180px;
+    background:var(--mid)
+  }
+  .col-photo img{
+    object-fit:contain;
+    object-position:center top
+  }
+
+  /* Same pattern: news top, edu below, equal auto heights */
+  .zone-edu{
+    grid-template-columns:1fr!important;
+    height:auto!important
+  }
+  .news-card{
+    height:auto;
+    max-height:none;
+    overflow:hidden
+  }
+  .news-list{overflow-y:auto}
+  .edu-inner{grid-template-columns:1fr 1fr!important}
+  .edu-col{padding:8px 12px;overflow:visible!important;height:auto!important}
+  .edu-degree{font-size:12px;word-break:break-word}
+  .edu-school{font-size:10px;word-break:break-word}
+  .edu-note{font-size:9.5px}
+  .etag{font-size:7.5px;padding:2px 5px;white-space:normal;word-break:break-word}
+
+  .zone-interests{grid-template-columns:repeat(3,1fr);height:auto!important}
+  .int-cell{min-height:70px;padding:8px 4px}
+  .int-icon{width:18px;height:18px;margin-bottom:3px}
+  .int-label{font-size:9px}
+  .int-index{font-size:8px}
+
+  .paper-card{grid-template-columns:120px 1fr;gap:10px}
+  .paper-title{font-size:13.5px}
+  .paper-authors{font-size:10.5px}
+  .paper-abstract{font-size:11px}
+
+  .project-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .sg{border-right:1px solid var(--border)!important}
+  .sg:last-child{border-bottom:none!important}
+  .award-item{grid-template-columns:76px 1fr;gap:8px}
+  .award-name{font-size:12.5px}
+  .award-year{font-size:8.5px}
+  .section-inner{padding:0 12px}
+  .section{padding:28px 0}
+  .links{gap:4px;flex-wrap:wrap}
+  .lnk{padding:5px 8px;font-size:10px}
+}
+</style></head><body><div id="ch"></div><div id="cv"></div>
+<nav><div class="nav-right"><ul class="nav-links">
+  <li><a href="#research">Research</a></li>
+  <li><a href="#projects">Projects</a></li>
+  <li class="opt"><a href="#skills">Skills</a></li>
+  <li class="opt"><a href="#awards">Awards</a></li>
+  <li class="opt"><a href="#extracurriculars">E.C.</a></li>
+  <li><a href="#life">OtL</a></li>
+  <li><a id="cvnav" style="cursor:pointer">CV</a></li>
+</ul><button class="tbtn" id="tbtn"><svg id="ticon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><line x1="8" y1="1" x2="8" y2="3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="8" x2="3" y2="8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="13" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="11.54" y1="11.54" x2="12.95" y2="12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="3.05" y1="3.05" x2="4.46" y2="4.46" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="3.05" y1="12.95" x2="4.46" y2="11.54" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="11.54" y1="4.46" x2="12.95" y2="3.05" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button></div></nav>
+
+<section id="hero">
+  <div class="zone-hero">
+    <div class="hero-name-row">
+      <div><h1 class="hero-name">Dave<span class="name-hy">(Hyeonjung)</span>Kim</h1></div>
+      <svg class="mech-drawing" viewBox="0 0 232 98" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(180px,22vw,270px);height:auto" aria-hidden="true">
+  <path d="M118,3 L141,3 Q156,26 141,55 L118,55 Z" stroke="currentColor" stroke-width="1.3" fill="currentColor" fill-opacity=".13" opacity=".38"/>
+  <line x1="124" y1="5" x2="124" y2="53" stroke="currentColor" stroke-width=".65" opacity=".11"/>
+  <line x1="130" y1="4" x2="130" y2="53" stroke="currentColor" stroke-width=".65" opacity=".11"/>
+  <line x1="136" y1="5" x2="136" y2="53" stroke="currentColor" stroke-width=".65" opacity=".11"/>
+  <rect x="121" y="54" width="19" height="5" rx="2.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity=".07" opacity=".22"/>
+  <g transform="translate(108.3,6.5) rotate(-177.71)"><rect x="-8.3" y="-3.8" width="16.5" height="7.6" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.08" opacity="0.16"/></g>
+<g transform="translate(83.8,7.0) rotate(175.24)"><rect x="-8.3" y="-3.4" width="16.6" height="6.7" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.08" opacity="0.16"/></g>
+<g transform="translate(61.8,11.1) rotate(163.30)"><rect x="-7.2" y="-2.9" width="14.4" height="5.9" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.08" opacity="0.16"/></g>
+<circle cx="121" cy="7" r="4.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.12" opacity="0.16"/>
+<circle cx="96" cy="6" r="4.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.12" opacity="0.16"/>
+<circle cx="72" cy="8" r="3.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.12" opacity="0.16"/>
+<circle cx="52" cy="14" r="3.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.12" opacity="0.16"/><g transform="translate(101.8,15.0) rotate(-177.14)"><rect x="-15.8" y="-3.8" width="31.5" height="7.6" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.11" opacity="0.22"/></g>
+<g transform="translate(63.8,18.1) rotate(167.47)"><rect x="-14.7" y="-3.4" width="29.4" height="6.7" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.11" opacity="0.22"/></g>
+<g transform="translate(30.8,30.1) rotate(151.93)"><rect x="-13.8" y="-2.9" width="27.5" height="5.9" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.11" opacity="0.22"/></g>
+<circle cx="122" cy="16" r="4.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.22"/>
+<circle cx="82" cy="14" r="4.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.22"/>
+<circle cx="46" cy="22" r="3.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.22"/>
+<circle cx="16" cy="38" r="3.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.22"/><g transform="translate(101.2,26.0) rotate(180.00)"><rect x="-17.2" y="-3.8" width="34.5" height="7.6" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.30"/></g>
+<g transform="translate(61.3,33.1) rotate(159.27)"><rect x="-16.0" y="-3.4" width="32.1" height="6.7" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.30"/></g>
+<g transform="translate(23.3,52.6) rotate(147.34)"><rect x="-19.9" y="-2.9" width="39.8" height="5.9" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.15" opacity="0.30"/></g>
+<circle cx="123" cy="26" r="4.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.19" opacity="0.30"/>
+<circle cx="80" cy="26" r="4.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.19" opacity="0.30"/>
+<circle cx="43" cy="40" r="3.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.19" opacity="0.30"/>
+<circle cx="4" cy="65" r="3.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.19" opacity="0.30"/><g transform="translate(122.9,65.7) rotate(123.69)"><rect x="-8.4" y="-4.5" width="16.7" height="9.0" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.10" opacity="0.20"/></g>
+<g transform="translate(107.8,83.2) rotate(138.81)"><rect x="-6.9" y="-4.0" width="13.8" height="8.0" rx="2" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.10" opacity="0.20"/></g>
+<circle cx="130" cy="55" r="4.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.14" opacity="0.20"/>
+<circle cx="116" cy="76" r="4.0" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.14" opacity="0.20"/>
+<circle cx="100" cy="90" r="3.5" stroke="currentColor" stroke-width="1.0" fill="currentColor" fill-opacity="0.14" opacity="0.20"/>
+  <path class="tendon" d="M18,71.0 C 28,66.0 37,51.5 46,52.5 C 58,48.5 70,36.0 80,36.0 C 93,33.0 114,32.5 125,31.5 L 148,39" stroke="#FFD100" stroke-width="1.4" fill="none" opacity=".92"/>
+  <path class="tendon" d="M18,81.0 C 28,82.0 37,64.5 46,63.5 C 58,62.5 70,48.0 80,48.0 C 93,47.0 114,44.5 125,44.5 L 148,51" stroke="#FFD100" stroke-width="1.4" fill="none" opacity=".92"/>
+  <circle cx="18" cy="76" r="2.0" fill="#FFD100" opacity=".88"/>
+  <g transform="translate(102.3,40.0) rotate(174.92)"><rect x="-18.3" y="-4.0" width="36.7" height="8.0" rx="2.2" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity=".30" opacity="0.86"/><circle cx="-7.3" cy="0" r="1.3" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/><circle cx="7.3" cy="0" r="1.3" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/></g><g transform="translate(62.8,50.1) rotate(154.80)"><rect x="-15.0" y="-3.5" width="30.1" height="7.0" rx="2.2" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity=".30" opacity="0.86"/><circle cx="-6.0" cy="0" r="1.2" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/><circle cx="6.0" cy="0" r="1.2" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/></g><g transform="translate(31.8,67.1) rotate(147.26)"><rect x="-13.4" y="-3.0" width="26.8" height="6.0" rx="2.2" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity=".30" opacity="0.86"/><circle cx="-5.4" cy="0" r="1.0" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/><circle cx="5.4" cy="0" r="1.0" fill="var(--bg)" stroke="currentColor" stroke-width=".85" opacity=".70"/></g>
+  <circle cx="18" cy="76" r="3.0" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".30" opacity=".86"/>
+  <circle cx="18" cy="76" r="1.2" fill="currentColor" opacity=".58"/>
+  <circle cx="125" cy="38" r="4.5" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".32" opacity=".88"/>
+  <circle cx="125" cy="38" r="1.5" fill="currentColor" opacity=".74"/>
+  <circle cx="80" cy="42" r="4.0" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".32" opacity=".88"/>
+  <circle cx="80" cy="42" r="1.4" fill="currentColor" opacity=".74"/>
+  <circle cx="46" cy="58" r="3.5" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".32" opacity=".88"/>
+  <circle cx="46" cy="58" r="1.2" fill="currentColor" opacity=".74"/>
+  <path d="M 128.30,38.00 L 128.19,37.29 L 127.92,36.63 L 127.52,36.04 L 127.01,35.57 L 126.42,35.22 L 125.77,35.01 L 125.10,34.96 L 124.44,35.04 L 123.82,35.27 L 123.27,35.62 L 122.82,36.08 L 122.49,36.62 L 122.28,37.21 L 122.21,37.82 L 122.28,38.43 L 122.47,39.00 L 122.78,39.51 L 123.19,39.93 L 123.67,40.25 L 124.20,40.45 L 124.76,40.53 L 125.31,40.48 L 125.84,40.32 L 126.30,40.05 L 126.69,39.69 L 126.99,39.26 L 127.18,38.79 L 127.27,38.29 L 127.24,37.79 L 127.10,37.32 L 126.87,36.89 L 126.56,36.54 L 126.18,36.26 L 125.76,36.08 L 125.32,35.99 L 124.87,36.01 L 124.45,36.12 L 124.07,36.32 L 123.75,36.59 L 123.50,36.91 L 123.34,37.28 L 123.25,37.67 L 123.26,38.05 L 123.35,38.42 L 123.51,38.76 L 123.74,39.04 L 124.02,39.26 L 124.34,39.41 L 124.67,39.49 L 125.00,39.49 L 125.32,39.42 L 125.60,39.28 L 125.85,39.09 L 126.03,38.86 L 126.16,38.59 L 126.23,38.32 L 126.23,38.04 L 126.18,37.78 L 126.07,37.54 L 125.91,37.34 L 125.72,37.18 L 125.51,37.08 L 125.28,37.02 L 125.06,37.02 L 124.85,37.07 L 124.67,37.16 L 124.51,37.28 L 124.39,37.43 L 124.31,37.59 L 124.27,37.76 L 124.28,37.93 L 124.32,38.09 L 124.38,38.22 L 124.48,38.33 L 124.59,38.41 L 124.71,38.46 L 124.83,38.48 L 124.94,38.47 L 125.04,38.43 L 125.12,38.38" stroke="#2774AE" stroke-width="1.0" fill="none" class="spring" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/>
+  <path d="M 82.80,42.00 L 82.72,41.46 L 82.53,40.95 L 82.25,40.49 L 81.90,40.10 L 81.47,39.80 L 81.00,39.58 L 80.51,39.46 L 80.00,39.44 L 79.51,39.52 L 79.04,39.69 L 78.63,39.95 L 78.27,40.27 L 78.00,40.66 L 77.80,41.09 L 77.70,41.54 L 77.68,42.00 L 77.75,42.45 L 77.91,42.86 L 78.15,43.24 L 78.44,43.56 L 78.79,43.80 L 79.18,43.98 L 79.59,44.07 L 80.00,44.08 L 80.40,44.01 L 80.77,43.87 L 81.11,43.65 L 81.39,43.39 L 81.60,43.07 L 81.76,42.73 L 81.83,42.36 L 81.84,42.00 L 81.78,41.65 L 81.64,41.32 L 81.46,41.03 L 81.22,40.78 L 80.94,40.59 L 80.64,40.47 L 80.32,40.40 L 80.00,40.40 L 79.69,40.46 L 79.41,40.58 L 79.16,40.74 L 78.95,40.95 L 78.79,41.19 L 78.69,41.46 L 78.64,41.73 L 78.64,42.00 L 78.70,42.26 L 78.80,42.50 L 78.94,42.71 L 79.12,42.88 L 79.33,43.01 L 79.55,43.09 L 79.78,43.13 L 80.00,43.12 L 80.21,43.07 L 80.41,42.98 L 80.57,42.86 L 80.71,42.71 L 80.81,42.54 L 80.87,42.36 L 80.89,42.18 L 80.88,42.00 L 80.83,41.83 L 80.76,41.69 L 80.66,41.56 L 80.54,41.46 L 80.41,41.39 L 80.27,41.35 L 80.13,41.34 L 80.00,41.36 L 79.88,41.40 L 79.78,41.46 L 79.69,41.54 L 79.63,41.63 L 79.59,41.73 L 79.58,41.82 L 79.58,41.92 L 79.60,42.00" stroke="#2774AE" stroke-width="1.0" fill="none" class="spring" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/>
+  <path d="M 48.40,58.00 L 48.34,57.59 L 48.21,57.20 L 48.02,56.85 L 47.77,56.53 L 47.48,56.27 L 47.15,56.06 L 46.79,55.92 L 46.41,55.84 L 46.03,55.83 L 45.66,55.88 L 45.31,55.99 L 44.99,56.16 L 44.70,56.38 L 44.46,56.64 L 44.27,56.94 L 44.14,57.26 L 44.07,57.60 L 44.05,57.94 L 44.09,58.27 L 44.19,58.59 L 44.34,58.88 L 44.54,59.13 L 44.77,59.35 L 45.04,59.52 L 45.32,59.64 L 45.62,59.71 L 45.92,59.72 L 46.21,59.69 L 46.49,59.60 L 46.75,59.47 L 46.98,59.30 L 47.17,59.10 L 47.32,58.86 L 47.42,58.62 L 47.48,58.36 L 47.50,58.09 L 47.47,57.84 L 47.39,57.60 L 47.28,57.37 L 47.13,57.18 L 46.96,57.01 L 46.76,56.88 L 46.55,56.79 L 46.32,56.74 L 46.10,56.73 L 45.88,56.76 L 45.68,56.82 L 45.49,56.91 L 45.32,57.04 L 45.19,57.19 L 45.08,57.35 L 45.00,57.53 L 44.96,57.72 L 44.95,57.90 L 44.98,58.08 L 45.03,58.25 L 45.11,58.40 L 45.21,58.53 L 45.34,58.64 L 45.47,58.73 L 45.62,58.79 L 45.76,58.82 L 45.91,58.82 L 46.05,58.80 L 46.18,58.75 L 46.30,58.69 L 46.40,58.61 L 46.48,58.51 L 46.54,58.41 L 46.58,58.30 L 46.60,58.18 L 46.60,58.08 L 46.57,57.97 L 46.54,57.88 L 46.49,57.80 L 46.42,57.73 L 46.35,57.68 L 46.28,57.64 L 46.20,57.62 L 46.12,57.62" stroke="#2774AE" stroke-width="1.0" fill="none" class="spring" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/>
+  <path d="M 128.50,38.00 L 128.39,37.32 L 128.16,36.69 L 127.81,36.12 L 127.36,35.64 L 126.83,35.26 L 126.25,34.99 L 125.63,34.84 L 125.00,34.82 L 124.39,34.92 L 123.81,35.14 L 123.30,35.46 L 122.86,35.86 L 122.52,36.34 L 122.28,36.87 L 122.16,37.43 L 122.14,38.00 L 122.23,38.55 L 122.43,39.06 L 122.72,39.52 L 123.09,39.91 L 123.52,40.21 L 124.00,40.42 L 124.50,40.53 L 125.00,40.54 L 125.49,40.45 L 125.94,40.27 L 126.34,40.01 L 126.68,39.68 L 126.95,39.30 L 127.12,38.88 L 127.22,38.44 L 127.22,38.00 L 127.14,37.57 L 126.98,37.18 L 126.75,36.83 L 126.46,36.54 L 126.12,36.32 L 125.76,36.17 L 125.38,36.10 L 125.00,36.10 L 124.64,36.18 L 124.30,36.32 L 124.01,36.52 L 123.77,36.77 L 123.59,37.06 L 123.47,37.36 L 123.41,37.68 L 123.42,38.00 L 123.49,38.30 L 123.61,38.57 L 123.79,38.81 L 124.00,39.00 L 124.23,39.15 L 124.49,39.24 L 124.75,39.28 L 125.00,39.26 L 125.24,39.20 L 125.45,39.09 L 125.63,38.95 L 125.78,38.78 L 125.88,38.59 L 125.94,38.39 L 125.96,38.19 L 125.94,38.00 L 125.88,37.82 L 125.79,37.67 L 125.68,37.54 L 125.55,37.45 L 125.41,37.38 L 125.27,37.35 L 125.13,37.35 L 125.00,37.38 L 124.89,37.43 L 124.79,37.50 L 124.72,37.58 L 124.67,37.67 L 124.65,37.77 L 124.65,37.85 L 124.67,37.93 L 124.70,38.00" stroke="rgba(255,255,255,0.75)" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 83.00,42.00 L 82.92,41.49 L 82.76,41.01 L 82.52,40.56 L 82.21,40.17 L 81.84,39.85 L 81.42,39.59 L 80.98,39.41 L 80.51,39.32 L 80.04,39.30 L 79.58,39.37 L 79.15,39.51 L 78.75,39.73 L 78.40,40.00 L 78.10,40.33 L 77.87,40.70 L 77.71,41.09 L 77.62,41.51 L 77.61,41.92 L 77.66,42.33 L 77.79,42.72 L 77.98,43.07 L 78.22,43.38 L 78.50,43.64 L 78.83,43.85 L 79.17,43.99 L 79.54,44.07 L 79.90,44.09 L 80.26,44.04 L 80.59,43.93 L 80.90,43.77 L 81.17,43.56 L 81.40,43.31 L 81.58,43.04 L 81.70,42.74 L 81.77,42.42 L 81.78,42.11 L 81.74,41.81 L 81.65,41.52 L 81.51,41.26 L 81.33,41.03 L 81.12,40.84 L 80.89,40.69 L 80.64,40.59 L 80.38,40.53 L 80.12,40.52 L 79.86,40.56 L 79.63,40.64 L 79.41,40.75 L 79.23,40.90 L 79.07,41.07 L 78.95,41.26 L 78.87,41.47 L 78.83,41.68 L 78.83,41.89 L 78.86,42.09 L 78.92,42.28 L 79.02,42.44 L 79.14,42.59 L 79.28,42.70 L 79.43,42.79 L 79.59,42.85 L 79.75,42.87 L 79.90,42.87 L 80.05,42.84 L 80.19,42.78 L 80.31,42.71 L 80.41,42.62 L 80.48,42.51 L 80.54,42.40 L 80.57,42.29 L 80.58,42.18 L 80.57,42.07 L 80.54,41.97 L 80.49,41.89 L 80.43,41.82 L 80.37,41.77 L 80.30,41.73 L 80.23,41.71 L 80.16,41.71 L 80.09,41.71" stroke="rgba(255,255,255,0.75)" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48.60,58.00 L 48.54,57.60 L 48.42,57.21 L 48.24,56.86 L 48.01,56.54 L 47.74,56.26 L 47.43,56.04 L 47.09,55.86 L 46.73,55.75 L 46.37,55.69 L 46.00,55.69 L 45.64,55.74 L 45.30,55.86 L 44.99,56.02 L 44.71,56.22 L 44.47,56.47 L 44.27,56.74 L 44.12,57.04 L 44.02,57.36 L 43.97,57.68 L 43.98,58.00 L 44.03,58.31 L 44.13,58.61 L 44.27,58.88 L 44.45,59.12 L 44.67,59.33 L 44.91,59.50 L 45.17,59.62 L 45.45,59.71 L 45.72,59.74 L 46.00,59.74 L 46.27,59.69 L 46.52,59.60 L 46.75,59.47 L 46.95,59.31 L 47.13,59.13 L 47.27,58.92 L 47.37,58.70 L 47.43,58.47 L 47.46,58.23 L 47.45,58.00 L 47.40,57.78 L 47.32,57.57 L 47.22,57.38 L 47.08,57.22 L 46.92,57.08 L 46.75,56.97 L 46.57,56.89 L 46.38,56.84 L 46.19,56.82 L 46.00,56.84 L 45.82,56.88 L 45.66,56.95 L 45.51,57.04 L 45.38,57.15 L 45.28,57.28 L 45.20,57.42 L 45.14,57.56 L 45.11,57.71 L 45.11,57.86 L 45.12,58.00 L 45.16,58.13 L 45.22,58.25 L 45.30,58.36 L 45.39,58.45 L 45.48,58.52 L 45.59,58.57 L 45.69,58.60 L 45.80,58.61 L 45.90,58.61 L 46.00,58.59 L 46.09,58.55 L 46.16,58.50 L 46.23,58.45 L 46.28,58.38 L 46.31,58.31 L 46.34,58.24 L 46.34,58.18 L 46.34,58.11 L 46.32,58.05 L 46.30,58.00" stroke="rgba(255,255,255,0.75)" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="148" y1="39" x2="166" y2="33" stroke="currentColor" stroke-width=".63" opacity=".28"/>
+<line x1="148" y1="39" x2="166" y2="45" stroke="currentColor" stroke-width=".63" opacity=".28"/>
+<line x1="148" y1="39" x2="166" y2="57" stroke="currentColor" stroke-width=".63" opacity=".28"/>
+<line x1="148" y1="51" x2="166" y2="33" stroke="currentColor" stroke-width=".63" opacity=".28"/>
+<line x1="148" y1="51" x2="166" y2="45" stroke="currentColor" stroke-width=".63" opacity=".28"/>
+<line x1="148" y1="51" x2="166" y2="57" stroke="currentColor" stroke-width=".63" opacity=".28"/><line x1="166" y1="33" x2="184" y2="27" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="33" x2="184" y2="39" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="33" x2="184" y2="51" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="33" x2="184" y2="63" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="45" x2="184" y2="27" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="45" x2="184" y2="39" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="45" x2="184" y2="51" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="45" x2="184" y2="63" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="57" x2="184" y2="27" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="57" x2="184" y2="39" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="57" x2="184" y2="51" stroke="currentColor" stroke-width=".56" opacity=".22"/>
+<line x1="166" y1="57" x2="184" y2="63" stroke="currentColor" stroke-width=".56" opacity=".22"/><line x1="184" y1="27" x2="202" y2="21" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="27" x2="202" y2="33" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="27" x2="202" y2="45" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="27" x2="202" y2="57" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="27" x2="202" y2="69" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="39" x2="202" y2="21" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="39" x2="202" y2="33" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="39" x2="202" y2="45" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="39" x2="202" y2="57" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="39" x2="202" y2="69" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="51" x2="202" y2="21" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="51" x2="202" y2="33" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="51" x2="202" y2="45" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="51" x2="202" y2="57" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="51" x2="202" y2="69" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="63" x2="202" y2="21" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="63" x2="202" y2="33" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="63" x2="202" y2="45" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="63" x2="202" y2="57" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+<line x1="184" y1="63" x2="202" y2="69" stroke="currentColor" stroke-width=".48" opacity=".16"/>
+  <circle class="out-node" cx="148" cy="39" r="4.4" stroke="#FFD100" stroke-width="1.3" fill="var(--bg)" opacity=".93"/>
+  <circle class="out-node" cx="148" cy="51" r="4.4" stroke="#FFD100" stroke-width="1.3" fill="var(--bg)" opacity=".93"/>
+  <circle cx="166" cy="33" r="3.4" stroke="currentColor" stroke-width="1.0" fill="var(--bg)" opacity=".82"/>
+<circle cx="166" cy="45" r="3.4" stroke="currentColor" stroke-width="1.0" fill="var(--bg)" opacity=".82"/>
+<circle cx="166" cy="57" r="3.4" stroke="currentColor" stroke-width="1.0" fill="var(--bg)" opacity=".82"/><circle cx="184" cy="27" r="3.0" stroke="currentColor" stroke-width="0.95" fill="var(--bg)" opacity=".78"/>
+<circle cx="184" cy="39" r="3.0" stroke="currentColor" stroke-width="0.95" fill="var(--bg)" opacity=".78"/>
+<circle cx="184" cy="51" r="3.0" stroke="currentColor" stroke-width="0.95" fill="var(--bg)" opacity=".78"/>
+<circle cx="184" cy="63" r="3.0" stroke="currentColor" stroke-width="0.95" fill="var(--bg)" opacity=".78"/><circle cx="202" cy="21" r="2.8" stroke="currentColor" stroke-width="0.88" fill="var(--bg)" opacity=".74"/>
+<circle cx="202" cy="33" r="2.8" stroke="currentColor" stroke-width="0.88" fill="var(--bg)" opacity=".74"/>
+<circle cx="202" cy="45" r="2.8" stroke="currentColor" stroke-width="0.88" fill="var(--bg)" opacity=".74"/>
+<circle cx="202" cy="57" r="2.8" stroke="currentColor" stroke-width="0.88" fill="var(--bg)" opacity=".74"/>
+<circle cx="202" cy="69" r="2.8" stroke="currentColor" stroke-width="0.88" fill="var(--bg)" opacity=".74"/>
+  <text x="208" y="24" font-family="Georgia,serif" font-size="7" fill="currentColor" opacity=".60">θ₁</text>
+  <text x="208" y="36" font-family="Georgia,serif" font-size="7" fill="currentColor" opacity=".60">θ₂</text>
+  <text x="208" y="48" font-family="Georgia,serif" font-size="7" fill="currentColor" opacity=".60">θ₃</text>
+  <text x="208" y="60" font-family="Georgia,serif" font-size="7" font-style="italic" fill="currentColor" opacity=".60">i</text>
+  <text x="208" y="72" font-family="Georgia,serif" font-size="7" fill="currentColor" opacity=".60">←Z</text>
+</svg>
+    </div>
+    <div class="rule-main"></div>
+    <div class="hero-content-row">
+      <div class="col-photo"><img src="images/me.jpg" alt="Dave Kim" decoding="async"></div>
+      <div class="col-right">
+        <div class="col-info"><div class="info-inner">
+          <div class="status-line">
+            <span class="status-text">Ph.D. STUDENT</span>
+            <span class="s-pipe">|</span>
+            <span class="status-loc">ROBOTICS (DRoM), SYSTEMS &amp; CONTROL @ UCLA</span>
+          </div>
+          <p class="bio">I'm a Mechanical Engineering Ph.D. student at UCLA with a focus on Robotics (DRoM), Systems &amp; Control, where I am fortunate to be co-advised by <a href="https://clites.seas.ucla.edu" target="_blank" class="bio-link">Prof. Clites</a> and <a href="https://flexible.seas.ucla.edu/group" target="_blank" class="bio-link">Prof. Hopkins</a>. My research spans the full-stack design of bioinspired robots, from mechanism design to control for safe physical interaction and robot learning for dexterous manipulation. The central question of my Ph.D. is how to optimally design and control a robot hand that can safely and dexterously interact with unstructured environments.</p>
+          <p class="bio">Before doing research at UCLA, I graduated Summa Cum Laude from Yonsei University. I have experience working on the Jump Enhancing Textile-Suit at Yonsei&rsquo;s <a href="https://hcr.yonsei.ac.kr/" target="_blank" class="bio-link">HCAIR Lab</a>, and the Dual-Transmission Actuator for prosthetics at Seoul National University&rsquo;s <a href="https://www.biorobotics.snu.ac.kr/" target="_blank" class="bio-link">Biorobotics Lab</a>. At <a href="https://y-yai.com/" target="_blank" class="bio-link">Yonsei Artificial Intelligence</a>, I worked on sim-to-real of IMU-free bipedal humanoids and a zero-demonstration VLA fine-tuning method using reinforcement-learned rollouts for the SO-101. Across these projects I have worked full-stack, from mechanical design and low-level control to learning-based methods, with hands-on experience in SolidWorks, PyTorch, Isaac Lab, and MATLAB.</p>
+          <p class="collab"><b>STUDENT COLLABORATORS</b>I'm open to working with students on my current research in robot hands, compliant joints, and tendon-driven actuation. If you're interested, <a href="mailto:davekim0323@ucla.edu?subject=Research%20collaboration">email me</a> with your background and what you'd like to work on.</p>
+          <div class="links">
+            <a href="mailto:davekim0323@ucla.edu" class="lnk" onclick="if(!window.__mailOpened){navigator.clipboard&&navigator.clipboard.writeText('davekim0323@ucla.edu')}"><svg width="13" height="10" viewBox="0 0 16 12" fill="none"><rect x=".75" y=".75" width="14.5" height="10.5" rx="1.25" stroke="currentColor" stroke-width="1.25"/><path d="M1 2.5l7 5 7-5" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>Email</a>
+            <a href="https://scholar.google.com/citations?user=IaoH-tEAAAAJ&hl=en" target="_blank" class="lnk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 10.5v4.5c0 2.485 2.686 4.5 6 4.5s6-2.015 6-4.5v-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="20" y1="8" x2="20" y2="14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="20" cy="15.5" r="1.1" fill="currentColor"/></svg>Scholar</a>
+            <a href="https://github.com/davekim000323" target="_blank" class="lnk"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub</a>
+            <a href="https://www.linkedin.com/in/davekim0323" target="_blank" class="lnk"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+            <span id="view-count" style="display:none;align-items:center;gap:6px;font-size:12px;color:var(--muted);border:1px solid var(--border);padding:7px 14px;letter-spacing:.04em;font-family:'DM Mono',monospace">VIEWS&nbsp;<b style="color:var(--gold);font-weight:400">&mdash;</b></span>
+          </div>
+        </div></div>
+        <!-- BOTTOM STRIP: News (1fr) | Education (2fr) -->
+        <div class="zone-edu">
+          <!-- News -->
+          <div class="news-card">
+            <span class="strip-label" style="padding-top:14px;display:block">Recent</span>
+            <div class="news-body">
+              <div class="news-list" style="margin-top:8px">
+              <div class="news-item"><span class="news-date">Jul 2026</span><span class="news-text">Awarded the Kwanjeong Educational Foundation Fellowship</span></div>
+              <div class="news-item"><span class="news-date">Apr 2026</span><span class="news-text">Committed to UCLA as Waldron Robotics Fellow</span></div>
+              <div class="news-item"><span class="news-date">Feb 2026</span><span class="news-text">Graduated Summa Cum Laude from Yonsei University</span></div>
+              <div class="news-item"><span class="news-date">Oct 2025</span><span class="news-text">Published first paper in Advanced Intelligent Systems</span></div>
+              <div class="news-item"><span class="news-date">Jul 2025</span><span class="news-text">Joined SNU&rsquo;s Biorobotics Lab to work on prosthetics</span></div>
+              <div class="news-item"><span class="news-date">Jun 2025</span><span class="news-text">Finished work on the JET-Suit at HCAIR Lab</span></div><div class="news-item"><span class="news-date">Dec 2023</span><span class="news-text">Joined Yonsei&rsquo;s HCAIR Lab to work on wearables</span></div>
+            </div>
+            </div>
+          </div>
+          <!-- Education — label at same height as "Recent", two degrees side by side -->
+          <div class="edu-card">
+            <span class="strip-label" style="padding:14px 22px 0;display:block">Education</span>
+            <div class="edu-inner">
+              <div class="edu-col">
+                <span class="edu-period">2026 &mdash; Present</span>
+                <div class="edu-degree">Ph.D. Mechanical Engineering</div>
+                <div class="edu-school">University of California, Los Angeles</div>
+                <div class="edu-note">Advisors: Prof. T. Clites, Prof. J. Hopkins</div>
+              </div>
+              <div class="edu-col">
+                <span class="edu-period">2019 &mdash; 2026</span>
+                <div class="edu-degree">B.S. in Mechanical Engineering</div>
+                <div class="edu-school">Yonsei University, Seoul</div>
+                <div class="edu-note">GPA: 3.99 / 4.00, D.M. in Computer Science</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- INTERESTS -->
+  <div class="zone-interests">
+  <span class="strip-label" style="color:var(--gold);padding:14px 18px 0;display:block">What I Do</span>
+  <div class="int-grid">
+    <div class="int-cell" data-n="01">
+      <svg class="int-icon" viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="int-index">01</span><span class="int-label">Bioinspired<br>Robot Design</span>
+    </div>
+    <div class="int-cell" data-n="02">
+      <svg class="int-icon" viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>
+      <span class="int-index">02</span><span class="int-label">Physical<br>Control</span>
+    </div>
+    <div class="int-cell" data-n="03">
+      <svg class="int-icon" viewBox="0 0 34 28" fill="none"><line class="nn-conn" x1="6" y1="5" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="23" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="8" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="20" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="28" cy="9" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/><circle cx="28" cy="19" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/></svg>
+      <span class="int-index">03</span><span class="int-label">Robot<br>Learning</span>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="section-inner">
+    <h2 class="section-title">Research</h2>
+
+    <div class="sub-head" id="current">Current Research</div>
+    <div class="sub-group">
+    <div class="paper-card feat">
+      <div class="paper-left">
+        <div class="paper-thumb rtj-thumb" id="rtj">
+          <img class="r1" src="images/rtj-open.webp" alt="Tendon-driven robot hand render, open" loading="lazy" decoding="async">
+          <img class="r2" src="images/rtj-tuck.webp" alt="Same hand with the thumb opposed" loading="lazy" decoding="async">
+          <div class="rtj-mode" role="group" aria-label="Figure mode"><button type="button" data-m="render" aria-pressed="true">RENDER</button><button type="button" data-m="live" aria-pressed="false">LIVE</button></div>
+          <div class="rtj-live" aria-label="Interactive finger. Move to flex, click to switch stiffness.">
+            <svg id="rtj-svg" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="rtj-read">K <b id="rtj-k">SOFT</b> · θ <b id="rtj-th">0°</b> · CLICK TO STIFFEN</div>
+          </div>
+        </div>
+        <div class="paper-icons"><div class="pi"><svg viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>01</span></div><div class="pi"><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span>02</span></div><div class="pi"><svg viewBox="0 0 34 28" fill="none"><line class="nn-conn" x1="6" y1="5" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="23" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="8" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="20" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="28" cy="9" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/><circle cx="28" cy="19" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/></svg><span>03</span></div></div>
+      </div>
+      <div class="paper-info">
+        <div class="venue-tags"><span class="venue-tag live">In Progress · UCLA</span></div>
+        <div class="paper-title">Reinforced-Tensegrity Joints for Safe, Dexterous Robot Hands</div>
+        <div class="paper-authors"><em>Hyeonjung Kim</em>, advised by Tyler Clites and Jonathan Hopkins</div>
+        <div class="paper-abstract">A tendon-driven robot hand built on reinforced-tensegrity joints, compliant joints that stay soft for safe contact, stiffen on demand for force, and switch quickly between the two. Two tracks run in parallel, the hand itself and extending the joints' fatigue life under cyclic load toward implant-level durability.</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="sub-head" id="publications">Publications</div>
+    <div class="sub-group">
+    <div class="paper-card">
+      <div class="paper-left">
+        <div class="paper-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/jetsuit.mp4" type="video/mp4"></video></div>
+        <div class="paper-icons"><div class="pi"><svg viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>01</span></div><div class="pi"><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span>02</span></div></div>
+      </div>
+      <div class="paper-info">
+        <div class="venue-tags"><span class="venue-tag">Advanced Intelligent Systems &middot; 2025</span><span class="venue-tag">IROS Late-Breaking Results &middot; 2025</span></div>
+        <div class="paper-title">A Soft Wearable Robot for Vertical Jump Enhancement via a Pneumatic Energy-Storing Propulsion Actuator and Triarticular Kinetic-Chained Structure</div>
+        <div class="paper-authors">Sunghun Kim, Hyeokjun Seo, <em>Hyeonjung Kim</em>, Sengryeol Lee, Namho Kim, Dongjun Shin</div>
+        <div class="paper-abstract">We present the Jump Enhancing Textile (JET)-Suit, a soft wearable exoskeleton that increases the user's vertical jump height through a Pneumatic Energy-Storing Actuator (PESPA) and a Triarticular Kinetic-Chained Structure (TKiCS).</div>
+        <div class="paper-btns">
+          <button class="pbtn" onclick="toggleAbs('abs1')">ABS</button>
+          <a class="pbtn" href="https://doi.org/10.1002/aisy.202500844" target="_blank">DOI</a>
+        </div>
+        <div class="abs-text" id="abs1">Soft wearable robots have garnered increasing attention across various fields; however, they remain insufficient in overcoming the physical limitations of the human body. In particular, enhancing vertical jump height, a commonly used indicator of physical capability, requires improving actuator power density and the efficiency of soft structures. To address these challenges, this study proposes the Jump-Enhancing Textile Suit (JET Suit), which integrates the Pneumatic Energy-Storing Propulsion Actuator (PESPA) and the Triarticular Kinetic-Chained Structure (TKiCS). PESPA enhances propulsion through elastic energy storage and release, while TKiCS optimizes kinetic chain interactions for improved force transmission. Experimental validation reveals a statistically significant increase in vertical jump height, with an average improvement of 3.74 cm and a maximum of 9.04 cm, alongside increased joint torques at the hip, knee, and ankle. Under isotonic testing conditions, PESPA achieves a high power density of 2298.69 W/kg, outperforming commercial pneumatic actuators. Additionally, accurate force prediction using an MCK-based model enables precise actuation control for effective assistance. These findings lay a solid foundation for pneumatic wearable robotics, offering promising applications in jump augmentation, rehabilitation, and athletic performance enhancement.</div>
+      </div>
+    </div>
+    <div class="paper-card">
+        <div class="paper-left">
+          <div class="paper-thumb" style="position:relative;padding:0">
+            <div style="display:flex;width:100%;height:100%">
+              <div style="position:relative;flex:1;overflow:hidden;border-right:1px solid var(--border)">
+                <video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/jose_teacher.mp4" type="video/mp4"></video>
+              </div>
+              <div style="position:relative;flex:1;overflow:hidden">
+                <video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/jose_estimator.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+          <div class="paper-icons">
+            <div class="pi"><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span>02</span></div><div class="pi"><svg viewBox="0 0 34 28" fill="none"><line class="nn-conn" x1="6" y1="5" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="23" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="8" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="20" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="28" cy="9" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/><circle cx="28" cy="19" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/></svg><span>03</span></div>
+          </div>
+        </div>
+        <div class="paper-info">
+          <div class="venue-tags"><span class="venue-tag" style="background:rgba(244,241,233,.07);color:var(--muted)">Submitted to IEEE ICRA &middot; 2027</span><span class="venue-tag" style="background:rgba(244,241,233,.07);color:var(--muted)">Submitted to CoRL Workshop (Everything Beneath the Policy) &middot; 2026</span></div>
+          <div class="paper-title">JOSE: Reconstructing Privileged State from Joint History for Humanoid Motion Control</div>
+          <div class="paper-authors"><em>Hyeonjung Kim</em>, Sunghyun Park</div>
+          <div class="paper-abstract">JOSE (Joint-Only State Estimator) is a recurrent estimator that reconstructs a teacher policy&rsquo;s privileged state, including the base orientation and angular velocity normally read from an IMU, from a window of joint-encoder history, and feeds it to a frozen teacher that runs with no IMU in the control loop. Across three Adversarial-Motion-Prior motion-tracking teachers and a command-conditioned locomotion teacher, it halves the motion error of joint-only distillation and tracks commands nearly as well as ground-truth observations.</div>
+          <div class="paper-btns">
+            <span class="pbtn" style="opacity:.35;cursor:default">ABS</span>
+            <span class="pbtn" style="opacity:.35;cursor:default">DOI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-head" id="working">Working Papers</div>
+    <div class="sub-group">
+    <div class="paper-card">
+      <div class="paper-left">
+        <div class="paper-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/dta.mp4" type="video/mp4"></video></div>
+        <div class="paper-icons"><div class="pi"><svg viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>01</span></div><div class="pi"><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span>02</span></div></div>
+      </div>
+      <div class="paper-info">
+        <div class="venue-tags"><span class="venue-tag pending">In Preparation</span></div>
+        <div class="paper-title">A Multi-Power Source Dual-Transmission Actuator for Tendon-Driven Systems</div>
+        <div class="paper-authors"><em>Hyeonjung Kim</em>, Munhyuk Jang, Kyujin Cho</div>
+        <div class="paper-abstract">A compact dual-transmission actuator that switches adaptively between high-speed and high-force modes in tendon-driven prosthetic fingers, so the finger closes fast and then grips hard at any contact posture.</div>
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-left">
+        <div class="paper-thumb" style="position:relative;padding:0">
+          <div style="display:flex;width:100%;height:100%">
+            <div style="position:relative;flex:1;overflow:hidden;border-right:1px solid var(--border)"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/scope_base.mp4" type="video/mp4"></video></div>
+            <div style="position:relative;flex:1;overflow:hidden"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/scope_success.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+        <div class="paper-icons"><div class="pi"><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span>02</span></div><div class="pi"><svg viewBox="0 0 34 28" fill="none"><line class="nn-conn" x1="6" y1="5" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="23" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="8" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="20" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="28" cy="9" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/><circle cx="28" cy="19" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/></svg><span>03</span></div></div>
+      </div>
+      <div class="paper-info">
+        <div class="venue-tags"><span class="venue-tag pending">In Preparation</span></div>
+        <div class="paper-title">SCOPE: Steer or Fine-tune? A Cheap Test for What a Frozen VLA Can Already Do</div>
+        <div class="paper-authors"><em>Hyeonjung Kim</em>, Seungmin Jeon, Jiwhan Bong</div>
+        <div class="paper-abstract">A cheap, demonstration-free, weight-free test of whether a frozen flow-matching VLA already has the latent competence for a task. SCOPE measures a low-dimensional causal noise subspace and searches it to decide whether to steer the frozen policy or fine-tune it.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <h2 class="section-title">Projects</h2>
+    <div class="project-grid">
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/jarvis.mp4" type="video/mp4"></video></div>
+        <div class="proj-body">
+          <span class="proj-tag">YAICON &middot; 2026</span>
+          <div class="proj-title"><a href="https://github.com/davekim000323/YAICON_2026-1_JARVIS" target="_blank" class="proj-title-link">JARVIS &mdash; RL for Zero-Demo VLA Fine-Tuning</a></div>
+          <div class="proj-desc">Built a demonstration-free pipeline that trains a tool-latent-conditioned RL policy in Isaac Sim and auto-generates demos to fine-tune SmolVLA for general tool pick-place-handover. Deployed the pipeline end-to-end, rolling out 500 episodes per tool to fine-tune SmolVLA for sim deployment on an SO-101 arm.</div>
+          <div class="proj-awards"><span class="etag">Member's Choice Award</span></div>
+          <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Isaac Lab</span><span class="proj-tool">Isaac Sim</span><span class="proj-tool">SmolVLA</span><span class="proj-tool">SO-101</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block">
+      <source src="video/yaicon.mp4" type="video/mp4">
+    </video></div>
+        <div class="proj-body">
+          <span class="proj-tag">YAICON &middot; 2025</span>
+          <div class="proj-title">DEXTRA &mdash; 12 DoF AMP Sim2Real</div>
+          <div class="proj-desc">Developed custom LSTM-based risk-assessment reward for Adversarial Motion Prior (AMP)-based policy training for natural gait emergence on a 12-DoF bipedal humanoid. Successfully deployed the learned locomotion policies on a physical Dynamixel-actuated platform.</div>
+          <div class="proj-awards"><span class="etag">YAICON 2nd Place</span></div>
+          <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Isaac Lab</span><span class="proj-tool">Isaac Sim</span><span class="proj-tool">Dynamixel</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/yaicon_yakemon.mp4" type="video/mp4"></video></div>
+        <div class="proj-body">
+          <span class="proj-tag">YAICON &middot; 2025</span>
+          <div class="proj-title"><a href="https://yakemon.netlify.app/battle" target="_blank" class="proj-title-link">YAKEMON - Pokemon Battle Agent</a></div>
+          <div class="proj-desc">Developed a custom Pok&eacute;mon battle agent trained through self-play reinforcement learning with 96-dim state encoding. Compared DQN, Dueling-DDQN, and PPO agents, with the Dueling-DDQN reaching a 91% peak win rate against the baseline while showing ability to exploit type matchups.</div>
+          <div class="proj-awards"><span class="etag">Member's Choice Award</span></div>
+          <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Python</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block">
+      <source src="video/drcha.mp4" type="video/mp4">
+    </video></div>
+        <div class="proj-body">
+          <span class="proj-tag">MEU4300 Creative Product Design &middot; 2025</span>
+          <div class="proj-title">Dr. CHA &mdash; Wheelchair Wheel Cleaner</div>
+          <div class="proj-desc">Led development of an app-controlled autonomous wheelchair wheel cleaning robot with vision-guided positioning and mobile app interface. Contributed across design, modeling, control, Convolutional Neural Network implementation and app integration.</div>
+          <div class="proj-awards"><span class="etag">Creative Coursework Achievement Award</span></div>
+          <div class="proj-tools"><span class="proj-tool">TensorFlow</span><span class="proj-tool">Arduino</span><span class="proj-tool">React</span><span class="proj-tool">SolidWorks</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block">
+      <source src="video/bibliobot.mp4" type="video/mp4">
+    </video></div>
+        <div class="proj-body">
+          <span class="proj-tag">MEU5059 Human Robotics &middot; 2025</span>
+          <div class="proj-title">Bibliobot &mdash; Library Assistant Robot</div>
+          <div class="proj-desc">Designed a library assistant robot with a 5-DoF end-effector and derived forward and inverse kinematics for autonomous book retrieval. Developed a hierarchical control system spanning low-level joint control to safety-constrained trajectory planning.</div>
+          <div class="proj-tools"><span class="proj-tool">MATLAB</span><span class="proj-tool">PyBullet</span><span class="proj-tool">Creo</span><span class="proj-tool">Autodesk Fusion</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/hcair.mp4" type="video/mp4"></video></div>
+        <div class="proj-body">
+          <span class="proj-tag">HCAIR Lab Internship &nbsp;&middot;&nbsp; 2023</span>
+          <div class="proj-title">JET-Suit Evaluator - Jump Height Calculator</div>
+          <div class="proj-desc">Streamlined the data acquisition protocol for computing JET-Suit users&rsquo; jump height, reducing the setup from 55 motion tracking markers and about an hour of processing down to a single marker and 5 minutes using force plate data. Also implemented a Long Short-Term Memory network to predict ground reaction forces from joint kinematics and dynamics.</div>
+          <div class="proj-awards"><span class="etag">HCAIR Lab Best Poster Award</span></div>
+          <div class="proj-tools"><span class="proj-tool">Visual3D</span><span class="proj-tool">Qualisys</span><span class="proj-tool">Theia</span><span class="proj-tool">Python</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/yaicv.mp4" type="video/mp4"></video></div>
+        <div class="proj-body">
+          <span class="proj-tag">YAI Computer Vision Basic &nbsp;&middot;&nbsp; 2024</span>
+          <div class="proj-title">YAI Computer Vision Toy Project</div>
+          <div class="proj-desc">Comparison study of 4 different computer vision models applied to real-time hand landmark detection using the FreiHAND dataset.</div>
+          <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Python</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="sg"><span class="sg-label">Programming</span><div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">C</span><span class="sk">Java</span><span class="sk">MATLAB/Simulink</span><span class="sk">LaTeX</span></div></div>
+      <div class="sg"><span class="sg-label">AI &amp; Robotics</span><div class="sk-tags"><span class="sk">PyTorch</span><span class="sk">TensorFlow</span><span class="sk">PyBullet</span><span class="sk">MuJoCo</span><span class="sk">Isaac Sim</span><span class="sk">Isaac Lab</span></div></div>
+      <div class="sg"><span class="sg-label">Motion Capture &amp; Biomechanics</span><div class="sk-tags"><span class="sk">Qualisys</span><span class="sk">Theia</span><span class="sk">Visual3D</span><span class="sk">OpenSim</span></div></div>
+      <div class="sg"><span class="sg-label">CAD</span><div class="sk-tags"><span class="sk">SolidWorks</span><span class="sk">Creo</span><span class="sk">Autodesk Fusion</span></div></div>
+      <div class="sg"><span class="sg-label">Embedded Systems</span><div class="sk-tags"><span class="sk">Arduino</span><span class="sk">ESP32</span><span class="sk">Raspberry Pi</span><span class="sk">Dynamixel</span></div></div>
+      <div class="sg"><span class="sg-label">Languages</span><div class="sk-tags"><span class="sk">English (TOEFL 119, GRE 163V/170Q/5.0AW)</span><span class="sk">Korean (Native)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+  <div class="section-inner">
+    <h2 class="section-title">Awards</h2>
+    <div class="award-list">
+      <div class="award-item"><span class="award-year">2026 &mdash; 2028</span><div><div class="award-name">Waldron Robotics Fellowship</div><div class="award-sub">Fully funded for 2 years</div></div><span class="award-org">University of California, Los Angeles</span></div>
+      <div class="award-item"><span class="award-year">2026 &mdash; 2031</span><div><div class="award-name">Kwanjeong Educational Foundation Fellowship</div><div class="award-sub">Funded a minimum of $25K annually for 5 years</div></div><span class="award-org">Kwanjeong Educational Foundation</span></div>
+      <div class="award-item"><span class="award-year">Feb 2026</span><div><div class="award-name">Summa Cum Laude</div><div class="award-sub">Top 1% of cohort, College of Engineering</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">Spring 2025</span><div><div class="award-name">Creative Coursework Achievement Award</div><div class="award-sub">For Dr. CHA project</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2019, 2024</span><div><div class="award-name">Jinri Scholarship</div><div class="award-sub">Merit-based placement scholarship for exceptional grades</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">Nov 2020</span><div><div class="award-name">KU Medical Hackathon Excellence Prize</div><div class="award-sub">Built a posture feedback cushion using a load cell array</div></div><span class="award-org">Konkuk University Hospital</span></div>
+      <div class="award-item"><span class="award-year">Spring 2019</span><div><div class="award-name">Dean&rsquo;s List</div><div class="award-sub">Top academic performers, College of Engineering</div></div><span class="award-org">Yonsei University</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTRACURRICULAR ACTIVITIES -->
+<section class="section" id="extracurriculars">
+  <div class="section-inner">
+    <h2 class="section-title">Extra Curricular</h2>
+    <div class="award-list">
+      <div class="award-item"><span class="award-year">2026 &mdash; 2026</span><div><div class="award-name">Yonsei Drone</div><div class="award-sub">Mechanical Engineering Club &middot; attended ROS and drone control seminars; collected training data and implemented YOLO-based object detection on a fixed-wing UAV for the 24th Korea Robot Aircraft Competition</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2024 &mdash; 2026</span><div><div class="award-name">Yonsei Artificial Intelligence (YAI)</div><div class="award-sub">Academic Student Society &middot; was executive staff managing member attendance, seminar logistics, and club operations; led study groups on computer vision and reinforcement learning</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2020 &mdash; 2025</span><div><div class="award-name">Eagle Tutor</div><div class="award-sub">Tutoring Program &middot; tutored 32 undergraduate students across Engineering Mathematics I&ndash;IV and Mechanical Engineering Experiment I</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2020 &mdash; 2021</span><div><div class="award-name">RoboIn</div><div class="award-sub">Mechanical Engineering Club &middot; attended seminars on embedded systems and hardware design; designed a posture feedback cushion using a load cell array and built an SVM classifier for real-time sitting posture detection at the KU Medical Hackathon</div></div><span class="award-org">Yonsei University</span></div>
+    </div>
+  </div>
+</section>
+<script>
+const ch=document.getElementById('ch'),cv=document.getElementById('cv');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+(function tick(){rx+=(mx-rx)*.32;ry+=(my-ry)*.32;ch.style.left=rx+'px';ch.style.top=ry+'px';cv.style.left=rx+'px';cv.style.top=ry+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,.int-cell,.edu-col,.col-photo,.tbtn,.mech-drawing,.proj-card,.paper-left,.news-body,.sg').forEach(function(el){
+  el.addEventListener('mouseenter',function(){document.body.classList.add('hov')});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('hov')});
+});
+var btn=document.getElementById('tbtn');
+var moon='<path d="M13.5 8A5.5 5.5 0 1 1 8 2.5a4.5 4.5 0 0 0 5.5 5.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>';
+var sun=document.getElementById('ticon').innerHTML;
+var light=false;
+btn.addEventListener('click',function(){light=!light;document.body.classList.toggle('light',light);document.getElementById('ticon').innerHTML=light?moon:sun});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+var cvnav=document.getElementById('cvnav');
+if(cvnav){cvnav.addEventListener('click',function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});});}
+
+function toggleAbs(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+
+</script>
+<!-- LIFE -->
+<section class="section" id="life">
+  <div class="section-inner">
+    <h2 class="section-title">Outside the Lab</h2>
+    <div class="life-grid">
+      <div class="lc">
+        <span class="sg-label">Football</span>
+        <div class="lc-big" id="club-name"></div>
+        <div class="lc-sub" id="club-note"></div>
+        <svg class="pitch" viewBox="0 0 120 170" aria-label="4-2-3-1 formation with my position, the number 10, highlighted">
+          <rect class="ln" x="4" y="4" width="112" height="162"/>
+          <line class="ln" x1="4" y1="85" x2="116" y2="85"/><circle class="ln" cx="60" cy="85" r="14"/>
+          <rect class="ln" x="32" y="4" width="56" height="22"/><rect class="ln" x="32" y="144" width="56" height="22"/>
+          <g id="formation"></g>
+        </svg>
+        <div class="pitch-cap">I PLAY AT 10 · STYLE CLOSER TO VITINHA</div>
+      </div>
+      <div class="lc">
+        <span class="sg-label">Albums on Repeat</span>
+        <div class="tracks-wrap"><ol class="tracklist" id="tracks"></ol></div>
+        <span class="list-hint">SCROLL FOR MORE</span>
+      </div>
+      <div class="lc">
+        <span class="sg-label">Films I Love</span>
+        <div class="reel" id="reel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV SECTION -->
+<section class="section" id="cv-section" style="padding-bottom:80px">
+  <div class="section-inner">
+    <h2 class="section-title">CV</h2>
+    <div style="border:1px solid var(--border);overflow:hidden">
+      <iframe
+        data-src="cv.pdf#view=FitH"
+        style="width:100%;height:85vh;border:none;display:block"
+        title="Dave Kim CV">
+      </iframe>
+    </div>
+    <div style="margin-top:14px;display:flex;justify-content:flex-end">
+      <a href="cv.pdf" download="Dave_Hyeonjung_Kim_CV.pdf"
+         class="pbtn" style="text-decoration:none">Download PDF</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var CODE='davekim0323'; /* your GoatCounter code */
+  if(!CODE) return;
+  var s=document.createElement("script");
+  s.async=true; s.src="//gc.zgo.at/count.js";
+  s.setAttribute("data-goatcounter","https://"+CODE+".goatcounter.com/count");
+  document.body.appendChild(s);
+  fetch("https://"+CODE+".goatcounter.com/counter/"+location.pathname+".json")
+    .then(function(r){return r.ok?r.json():null})
+    .then(function(d){var el=document.getElementById("view-count"); if(el&&d&&d.count){el.querySelector("b").textContent=d.count; el.style.display="inline-flex";}})
+    .catch(function(){});
+})();
+</script>
+<script>
+/* ====== EDIT ME: things you love ======
+   cover and poster are optional image paths, link is optional (Spotify, Letterboxd, etc.) */
+var LIFE = {
+  club: { name: 'Manchester United', note: 'Favourite player Bruno Fernandes' },
+  songs: [
+    { title: 'More Chaos', artist: 'Ken Carson' },
+    { title: 'MUSIC', artist: 'Playboi Carti' },
+    { title: 'Slime Season 3', artist: 'Young Thug' },
+    { title: 'AM', artist: 'Arctic Monkeys' },
+    { title: 'Boogie Nights', artist: 'Ghostcluv' },
+    { title: '킁', artist: 'C Jamm' },
+    { title: 'After Hours', artist: 'The Weeknd' },
+    { title: 'Starboy', artist: 'The Weeknd' },
+    { title: 'channel ORANGE', artist: 'Frank Ocean' },
+    { title: 'Blonde', artist: 'Frank Ocean' }
+  ],
+  films: [
+    { title: 'A Clockwork Orange', meta: '1971 · Stanley Kubrick', poster: 'images/films/a-clockwork-orange.jpg', c: ['#E2531C', '#120d0a'], link: 'https://letterboxd.com/film/a-clockwork-orange/' },
+    { title: '2001: A Space Odyssey', meta: '1968 · Stanley Kubrick', poster: 'images/films/2001-a-space-odyssey.jpg', c: ['#8f8b84', '#0D0C0A'], link: 'https://letterboxd.com/film/2001-a-space-odyssey/' },
+    { title: 'Eraserhead', meta: '1977 · David Lynch', poster: 'images/films/eraserhead.jpg', c: ['#5c5a57', '#080808'], link: 'https://letterboxd.com/film/eraserhead/' },
+    { title: 'Sympathy for Mr. Vengeance', meta: '2002 · Park Chan-wook', poster: 'images/films/sympathy-for-mr-vengeance.jpg', c: ['#8E1B1B', '#120a0a'], link: 'https://letterboxd.com/film/sympathy-for-mr-vengeance/' },
+    { title: '3-Iron', meta: '2004 · Kim Ki-duk', poster: 'images/films/3-iron.jpg', c: ['#4E6B55', '#0f1411'], link: 'https://letterboxd.com/film/3-iron/' }
+  ]
+};
+
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Photo settles into place on click (hover does it on desktop) */
+  var cp=document.querySelector('.col-photo');
+  if(cp)cp.addEventListener('click',function(){cp.classList.toggle('set')});
+
+  /* Videos play only while on screen */
+  var vids=document.querySelectorAll('video.lv');
+  if('IntersectionObserver' in window){
+    var vio=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){if(!reduce){var p=e.target.play();if(p&&p.catch)p.catch(function(){})}}else e.target.pause();
+    })},{rootMargin:'200px 0px'});
+    vids.forEach(function(v){vio.observe(v)});
+  }else vids.forEach(function(v){v.autoplay=true;v.play()});
+
+  /* CV loads when scrolled near */
+  var cvf=document.querySelector('iframe[data-src]');
+  if(cvf){
+    if('IntersectionObserver' in window){var cio=new IntersectionObserver(function(es){if(es[0].isIntersecting){cvf.src=cvf.dataset.src;cio.disconnect()}},{rootMargin:'600px 0px'});cio.observe(cvf)}
+    else cvf.src=cvf.dataset.src;
+  }
+
+  /* Crosshair grows over the new interactive bits too */
+  document.querySelectorAll('.lc,.film,.tracklist li,.rtj-thumb,.collab a').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('hov')});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('hov')});
+  });
+
+  /* ---------- RT-Joints LIVE finger, fingertip reaches the cursor through IK ---------- */
+  var thumb=document.getElementById('rtj'),svg=document.getElementById('rtj-svg');
+  if(thumb&&svg){
+    var L=[80,58,44],LO=[-12,0,0],HI=[95,105,85],base={x:78,y:58},spool={x:44,y:58,r:7},D=Math.PI/180;
+    var MODES={soft:{k:30,c:3.4},firm:{k:280,c:32}},mode='soft';
+    var q=[12,20,15],qd=[0,0,0],qT=q.slice(),goal={x:210,y:120},lastPtr=-1e9,live=false;
+    function mk(tag,a){var e=document.createElementNS(NS,tag);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e}
+    mk('circle',{cx:spool.x,cy:spool.y,r:spool.r,fill:'none',stroke:'var(--muted)','stroke-width':1});
+    mk('line',{x1:spool.x+spool.r+4,y1:spool.y-12,x2:spool.x+spool.r+4,y2:spool.y+12,stroke:'var(--muted)','stroke-width':1});
+    var gRing=mk('circle',{r:5,fill:'none',stroke:'var(--gold)','stroke-width':.8,'stroke-dasharray':'2 2',opacity:.7});
+    var tendon=mk('path',{fill:'none',stroke:'var(--gold)','stroke-width':1.1,'stroke-linejoin':'round'});
+    var links=mk('path',{fill:'none',stroke:'var(--text)','stroke-width':1.6,'stroke-linecap':'round','stroke-linejoin':'round'});
+    var js=[0,1,2].map(function(){return mk('circle',{r:3,fill:'var(--bg)',stroke:'var(--text)','stroke-width':1.2})});
+    var tip=mk('circle',{r:2.2,fill:'var(--gold)'});
+    var kEl=document.getElementById('rtj-k'),thEl=document.getElementById('rtj-th');
+    function fk(a){
+      var A=0,o={x:base.x,y:base.y},P=[o],F=[];
+      for(var i=0;i<3;i++){A+=a[i]*D;F.push({x:o.x,y:o.y,a:A});o={x:o.x+L[i]*Math.cos(A),y:o.y+L[i]*Math.sin(A)};P.push(o)}
+      return {P:P,F:F,tip:o};
+    }
+    /* cyclic coordinate descent, warm-started, inside each joint's range */
+    function ik(){
+      for(var it=0;it<10;it++)for(var j=2;j>=0;j--){
+        var k=fk(qT),pj=k.P[j],tp=k.tip;
+        var d=Math.atan2(goal.y-pj.y,goal.x-pj.x)-Math.atan2(tp.y-pj.y,tp.x-pj.x);
+        while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;
+        qT[j]=Math.max(LO[j],Math.min(HI[j],qT[j]+d/D*.85));
+      }
+    }
+    function draw(){
+      var k=fk(q),P=k.P,F=k.F;
+      links.setAttribute('d','M'+P.map(function(p){return p.x.toFixed(1)+' '+p.y.toFixed(1)}).join(' L'));
+      for(var i=0;i<3;i++){js[i].setAttribute('cx',P[i].x.toFixed(1));js[i].setAttribute('cy',P[i].y.toFixed(1))}
+      tip.setAttribute('cx',k.tip.x.toFixed(1));tip.setAttribute('cy',k.tip.y.toFixed(1));
+      gRing.setAttribute('cx',goal.x.toFixed(1));gRing.setAttribute('cy',goal.y.toFixed(1));
+      var tp=[{x:spool.x,y:spool.y+spool.r},{x:base.x-6,y:base.y+6}];
+      for(i=0;i<3;i++){var f=F[i],c=Math.cos(f.a),sn=Math.sin(f.a);[.3,.85].forEach(function(r){tp.push({x:f.x+L[i]*r*c-6*sn,y:f.y+L[i]*r*sn+6*c})})}
+      tendon.setAttribute('d','M'+tp.map(function(p){return p.x.toFixed(1)+' '+p.y.toFixed(1)}).join(' L'));
+      thEl.textContent=Math.round(q[0]+q[1]+q[2])+'°';
+    }
+    thumb.querySelectorAll('.rtj-mode button').forEach(function(b){b.addEventListener('click',function(e){
+      e.stopPropagation();live=b.dataset.m==='live';thumb.classList.toggle('live',live);
+      thumb.querySelectorAll('.rtj-mode button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      if(live)start();
+    })});
+    svg.addEventListener('pointermove',function(e){
+      var m=svg.getScreenCTM();if(!m)return;var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;pt=pt.matrixTransform(m.inverse());
+      goal={x:pt.x,y:pt.y};lastPtr=performance.now();if(reduce){ik();q=qT.slice();draw()}
+    });
+    svg.addEventListener('click',function(){mode=mode==='soft'?'firm':'soft';kEl.textContent=mode.toUpperCase()});
+    var running=false,prev=0;
+    function step(now){
+      var dt=Math.min(.033,(now-prev)/1000);prev=now;
+      if(now-lastPtr>2500){var s=now/1000;goal={x:base.x+125+45*Math.cos(s*.8),y:base.y+55+40*Math.sin(s*1.2)}}
+      ik();
+      var p=MODES[mode];
+      for(var j=0;j<3;j++){qd[j]+=(p.k*(qT[j]-q[j])-p.c*qd[j])*dt;q[j]+=qd[j]*dt}
+      draw();
+      if(live&&!reduce)requestAnimationFrame(step);else running=false;
+    }
+    function start(){if(reduce){ik();q=qT.slice();draw();return}if(!running){running=true;prev=performance.now();requestAnimationFrame(step)}}
+    ik();q=qT.slice();draw();
+  }
+
+  /* ---------- Outside the Lab ---------- */
+  var cn=document.getElementById('club-name');if(cn){cn.textContent=LIFE.club.name;document.getElementById('club-note').textContent=LIFE.club.note}
+  var form=document.getElementById('formation');
+  if(form){
+    var XI=[[60,156,'GK'],[18,128,'LB'],[45,134,'CB'],[75,134,'CB'],[102,128,'RB'],[45,108,'DM'],[75,108,'DM'],[20,64,'LW'],[100,64,'RW'],[60,40,'ST']];
+    XI.forEach(function(p){var g=document.createElementNS(NS,'g');g.innerHTML='<title>'+p[2]+'</title><circle class="pos" cx="'+p[0]+'" cy="'+p[1]+'" r="4.5"/>';form.appendChild(g)});
+    var me=document.createElementNS(NS,'g');
+    me.innerHTML='<title>CAM, me</title><circle class="ring" cx="60" cy="66" r="6"/><circle class="pos me" cx="60" cy="66" r="6"/><text class="num" x="60" y="66">10</text>';
+    form.appendChild(me);
+  }
+  var tl=document.getElementById('tracks');
+  if(tl)tl.innerHTML=LIFE.songs.map(function(x,i){
+    var inner='<span class="tr-i">'+String(i+1).padStart(2,'0')+'</span><span class="tr-t">'+esc(x.title)+'<small>'+esc(x.artist)+'</small></span><span class="eq"><i></i><i></i><i></i></span>';
+    x.link=x.link||'https://open.spotify.com/search/'+encodeURIComponent(x.title+' '+x.artist);
+    return '<li>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank" rel="noopener">'+inner+'</a>':'<span class="row">'+inner+'</span>')+'</li>';
+  }).join('');
+  var reel=document.getElementById('reel'),pal=[['#2774AE','#141210'],['#8A6D00','#141210'],['#3B3530','#0D0C0A'],['#1F4E70','#241C10']];
+  if(reel)reel.innerHTML=LIFE.films.map(function(f,i){
+    var c=f.c||pal[i%pal.length];
+    var face='<div class="film-ph" style="--c1:'+c[0]+';--c2:'+c[1]+'">'+esc(f.title)+'</div>'+(f.poster?'<img class="film-poster" src="'+esc(f.poster)+'" alt="'+esc(f.title)+' poster" loading="lazy" onerror="this.remove()">':'');
+    var inner='<div class="film-frame">'+face+'</div><div class="film-cap" title="'+esc(f.title)+'"><span>'+esc(f.title)+'</span><small>'+esc(f.meta||'')+'</small></div>';
+    return f.link?'<a class="film" href="'+esc(f.link)+'" target="_blank" rel="noopener">'+inner+'</a>':'<div class="film">'+inner+'</div>';
+  }).join('');
+})();
+</script>
+</body></html>
