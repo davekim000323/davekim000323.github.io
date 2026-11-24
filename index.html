@@ -443,6 +443,36 @@ body.light .collab a{text-decoration-color:var(--blue)}
   .links{gap:4px;flex-wrap:wrap}
   .lnk{padding:5px 8px;font-size:10px}
 }
+
+/* v10 de-template pass: mono kept for data only */
+.strip-label,.sg-label{font-family:'Fraunces',serif!important;font-style:italic;font-weight:300;text-transform:none!important;letter-spacing:0!important}
+.strip-label{font-size:19px!important}
+.sg-label{font-size:17px!important;color:var(--text)!important}
+body:not(.light) .sg-label{color:var(--gold)!important}
+.sub-head{font-family:'Fraunces',serif!important;font-style:italic;font-weight:300;font-size:22px!important;letter-spacing:0!important;text-transform:none!important}
+.status-line{margin-bottom:12px}
+.status-text{font-family:'Hanken Grotesk',sans-serif!important;font-size:14px!important;font-weight:500!important;letter-spacing:0!important;color:var(--gold)!important}
+body.light .status-text{color:var(--blue)!important}
+.bio-collab{margin-top:4px;color:var(--sub)}
+.int-cell::before{content:none!important}
+.venue-tags{display:flex;flex-wrap:wrap;gap:4px 16px}
+.venue-tag{background:none!important;padding:0!important;letter-spacing:.06em!important;color:var(--blue)}
+.venue-tag.pending{color:var(--muted)!important}
+body.light .venue-tag{color:var(--blue)}
+body.light .venue-tag.pending{color:var(--muted)!important}
+.ws-list{list-style:none;margin:6px 0 2px;padding:0;font-size:12.5px;color:var(--sub);line-height:1.55}
+.ws-list li{padding-left:14px;position:relative}
+.ws-list li::before{content:'';position:absolute;left:0;top:.72em;width:6px;height:1px;background:var(--muted)}
+.ws-list span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);margin-left:6px;white-space:nowrap}
+.pt-sub{display:block;font-family:'Hanken Grotesk',sans-serif;font-size:12.5px;color:var(--muted);margin-top:2px}
+.pitch-cap{font-family:'Hanken Grotesk',sans-serif!important;font-size:12.5px!important;letter-spacing:0!important;color:var(--sub)!important}
+.cm-note{font-size:14px;color:var(--sub);max-width:640px;line-height:1.65;margin:-14px 0 22px}
+.cm-off{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted);border:1px dashed var(--border);padding:18px}
+#giscus-box{max-width:820px}
+@media(max-width:800px){.strip-label{font-size:16px!important}.sub-head{font-size:19px!important}}
+.ws-list{margin-bottom:12px!important}
+.etag{background:none!important;padding:0!important;color:var(--gold)!important}
+body.light .etag{color:var(--blue)!important}
 </style></head><body><div id="ch"></div><div id="cv"></div>
 <nav><div class="nav-right"><ul class="nav-links">
   <li><a href="#research">Research</a></li>
@@ -566,13 +596,11 @@ body.light .collab a{text-decoration-color:var(--blue)}
       <div class="col-right">
         <div class="col-info"><div class="info-inner">
           <div class="status-line">
-            <span class="status-text">Ph.D. STUDENT</span>
-            <span class="s-pipe">|</span>
-            <span class="status-loc">ROBOTICS (DRoM), SYSTEMS &amp; CONTROL @ UCLA</span>
+            <span class="status-text">Ph.D. student at UCLA, Robotics (DRoM), Systems &amp; Control</span>
           </div>
-          <p class="bio">I'm a Mechanical Engineering Ph.D. student at UCLA with a focus on Robotics (DRoM), Systems &amp; Control, where I am fortunate to be co-advised by <a href="https://clites.seas.ucla.edu" target="_blank" class="bio-link">Prof. Clites</a> and <a href="https://flexible.seas.ucla.edu/group" target="_blank" class="bio-link">Prof. Hopkins</a>. My research spans the full-stack design of bioinspired robots, from mechanism design to control for safe physical interaction and robot learning for dexterous manipulation. The central question of my Ph.D. is how to optimally design and control a robot hand that can safely and dexterously interact with unstructured environments.</p>
-          <p class="bio">Before doing research at UCLA, I graduated Summa Cum Laude from Yonsei University. I have experience working on the Jump Enhancing Textile-Suit at Yonsei&rsquo;s <a href="https://hcr.yonsei.ac.kr/" target="_blank" class="bio-link">HCAIR Lab</a>, and the Dual-Transmission Actuator for prosthetics at Seoul National University&rsquo;s <a href="https://www.biorobotics.snu.ac.kr/" target="_blank" class="bio-link">Biorobotics Lab</a>. At <a href="https://y-yai.com/" target="_blank" class="bio-link">Yonsei Artificial Intelligence</a>, I worked on sim-to-real of IMU-free bipedal humanoids and a zero-demonstration VLA fine-tuning method using reinforcement-learned rollouts for the SO-101. Across these projects I have worked full-stack, from mechanical design and low-level control to learning-based methods, with hands-on experience in SolidWorks, PyTorch, Isaac Lab, and MATLAB.</p>
-          <p class="collab"><b>STUDENT COLLABORATORS</b>I'm open to working with students on my current research in robot hands, compliant joints, and tendon-driven actuation. If you're interested, <a href="mailto:davekim0323@ucla.edu?subject=Research%20collaboration">email me</a> with your background and what you'd like to work on.</p>
+          <p class="bio">I'm a Ph.D. student in Mechanical and Aerospace Engineering at UCLA, co-advised by <a href="https://clites.seas.ucla.edu" target="_blank" class="bio-link">Prof. Clites</a> and <a href="https://flexible.seas.ucla.edu/group" target="_blank" class="bio-link">Prof. Hopkins</a>. I work on robot hands, mainly tendon-driven fingers built on reinforced-tensegrity joints, compliant joints whose stiffness can be switched during contact. The work covers the joint mechanism, the impedance control around it, and the learned policies that run the hand.</p>
+          <p class="bio">I did my B.S. at Yonsei University. At Yonsei&rsquo;s <a href="https://hcr.yonsei.ac.kr/" target="_blank" class="bio-link">HCAIR Lab</a> I worked on the JET-Suit, a pneumatic soft suit for jump enhancement, and at Seoul National University&rsquo;s <a href="https://www.biorobotics.snu.ac.kr/" target="_blank" class="bio-link">Biorobotics Lab</a> on a dual-transmission actuator for prosthetic fingers. With <a href="https://y-yai.com/" target="_blank" class="bio-link">Yonsei Artificial Intelligence</a> I trained IMU-free humanoid locomotion policies and built a demonstration-free fine-tuning pipeline for a VLA on the SO-101 arm.</p>
+          <p class="bio bio-collab">Students who want to work on the hand or the joints can <a href="mailto:davekim0323@ucla.edu?subject=Research%20collaboration" class="bio-link">email me</a> with their background and what they would like to try.</p>
           <div class="links">
             <a href="mailto:davekim0323@ucla.edu" class="lnk" onclick="if(!window.__mailOpened){navigator.clipboard&&navigator.clipboard.writeText('davekim0323@ucla.edu')}"><svg width="13" height="10" viewBox="0 0 16 12" fill="none"><rect x=".75" y=".75" width="14.5" height="10.5" rx="1.25" stroke="currentColor" stroke-width="1.25"/><path d="M1 2.5l7 5 7-5" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>Email</a>
             <a href="https://scholar.google.com/citations?user=IaoH-tEAAAAJ&hl=en" target="_blank" class="lnk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 10.5v4.5c0 2.485 2.686 4.5 6 4.5s6-2.015 6-4.5v-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="20" y1="8" x2="20" y2="14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="20" cy="15.5" r="1.1" fill="currentColor"/></svg>Scholar</a>
@@ -588,6 +616,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
             <span class="strip-label" style="padding-top:14px;display:block">Recent</span>
             <div class="news-body">
               <div class="news-list" style="margin-top:8px">
+              <div class="news-item"><span class="news-date">Nov 2026</span><span class="news-text">JOSE accepted at three humanoid workshops</span></div>
               <div class="news-item"><span class="news-date">Jul 2026</span><span class="news-text">Awarded the Kwanjeong Educational Foundation Fellowship</span></div>
               <div class="news-item"><span class="news-date">Apr 2026</span><span class="news-text">Committed to UCLA as Waldron Robotics Fellow</span></div>
               <div class="news-item"><span class="news-date">Feb 2026</span><span class="news-text">Graduated Summa Cum Laude from Yonsei University</span></div>
@@ -602,13 +631,13 @@ body.light .collab a{text-decoration-color:var(--blue)}
             <span class="strip-label" style="padding:14px 22px 0;display:block">Education</span>
             <div class="edu-inner">
               <div class="edu-col">
-                <span class="edu-period">2026 &mdash; Present</span>
+                <span class="edu-period">2026 &ndash; Present</span>
                 <div class="edu-degree">Ph.D. Mechanical Engineering</div>
                 <div class="edu-school">University of California, Los Angeles</div>
                 <div class="edu-note">Advisors: Prof. T. Clites, Prof. J. Hopkins</div>
               </div>
               <div class="edu-col">
-                <span class="edu-period">2019 &mdash; 2026</span>
+                <span class="edu-period">2019 &ndash; 2026</span>
                 <div class="edu-degree">B.S. in Mechanical Engineering</div>
                 <div class="edu-school">Yonsei University, Seoul</div>
                 <div class="edu-note">GPA: 3.99 / 4.00, D.M. in Computer Science</div>
@@ -621,7 +650,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
   </div>
   <!-- INTERESTS -->
   <div class="zone-interests">
-  <span class="strip-label" style="color:var(--gold);padding:14px 18px 0;display:block">What I Do</span>
+  <span class="strip-label" style="color:var(--gold);padding:14px 18px 0;display:block">Research areas</span>
   <div class="int-grid">
     <div class="int-cell" data-n="01">
       <svg class="int-icon" viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -663,7 +692,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
         <div class="venue-tags"><span class="venue-tag live">In Progress · UCLA</span></div>
         <div class="paper-title">Reinforced-Tensegrity Joints for Safe, Dexterous Robot Hands</div>
         <div class="paper-authors"><em>Hyeonjung Kim</em>, advised by Tyler Clites and Jonathan Hopkins</div>
-        <div class="paper-abstract">A tendon-driven robot hand built on reinforced-tensegrity joints, compliant joints that stay soft for safe contact, stiffen on demand for force, and switch quickly between the two. Two tracks run in parallel, the hand itself and extending the joints' fatigue life under cyclic load toward implant-level durability.</div>
+        <div class="paper-abstract">A tendon-driven hand built on reinforced-tensegrity joints. The joints stay compliant for safe contact and stiffen on demand when the task needs force. A second track tests the joints under cyclic load, aiming for fatigue life close to implant grade.</div>
       </div>
     </div>
     </div>
@@ -704,9 +733,14 @@ body.light .collab a{text-decoration-color:var(--blue)}
           </div>
         </div>
         <div class="paper-info">
-          <div class="venue-tags"><span class="venue-tag" style="background:rgba(244,241,233,.07);color:var(--muted)">Submitted to IEEE ICRA &middot; 2027</span><span class="venue-tag" style="background:rgba(244,241,233,.07);color:var(--muted)">Submitted to CoRL Workshop (Everything Beneath the Policy) &middot; 2026</span></div>
+          <div class="venue-tags"><span class="venue-tag">Humanoids 2026 Workshops &middot; Accepted</span><span class="venue-tag pending">Submitted to IEEE ICRA &middot; 2027</span></div>
           <div class="paper-title">JOSE: Reconstructing Privileged State from Joint History for Humanoid Motion Control</div>
           <div class="paper-authors"><em>Hyeonjung Kim</em>, Sunghyun Park</div>
+          <ul class="ws-list">
+            <li>Multimodal Data for Humanoid Whole-Body Control and Manipulation <span>Humanoids 2026</span></li>
+            <li>Trustworthy Humanoid Systems <span>Humanoids 2026</span></li>
+            <li>Frontiers in Robust Whole-Body Control, Methods, Systems, and Real-World Deployment <span>2026</span></li>
+          </ul>
           <div class="paper-abstract">JOSE (Joint-Only State Estimator) is a recurrent estimator that reconstructs a teacher policy&rsquo;s privileged state, including the base orientation and angular velocity normally read from an IMU, from a window of joint-encoder history, and feeds it to a frozen teacher that runs with no IMU in the control loop. Across three Adversarial-Motion-Prior motion-tracking teachers and a command-conditioned locomotion teacher, it halves the motion error of joint-only distillation and tracks commands nearly as well as ground-truth observations.</div>
           <div class="paper-btns">
             <span class="pbtn" style="opacity:.35;cursor:default">ABS</span>
@@ -761,7 +795,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
         <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/jarvis.mp4" type="video/mp4"></video></div>
         <div class="proj-body">
           <span class="proj-tag">YAICON &middot; 2026</span>
-          <div class="proj-title"><a href="https://github.com/davekim000323/YAICON_2026-1_JARVIS" target="_blank" class="proj-title-link">JARVIS &mdash; RL for Zero-Demo VLA Fine-Tuning</a></div>
+          <div class="proj-title"><a href="https://github.com/davekim000323/YAICON_2026-1_JARVIS" target="_blank" class="proj-title-link">JARVIS<span class="pt-sub">RL for Zero-Demo VLA Fine-Tuning</span></a></div>
           <div class="proj-desc">Built a demonstration-free pipeline that trains a tool-latent-conditioned RL policy in Isaac Sim and auto-generates demos to fine-tune SmolVLA for general tool pick-place-handover. Deployed the pipeline end-to-end, rolling out 500 episodes per tool to fine-tune SmolVLA for sim deployment on an SO-101 arm.</div>
           <div class="proj-awards"><span class="etag">Member's Choice Award</span></div>
           <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Isaac Lab</span><span class="proj-tool">Isaac Sim</span><span class="proj-tool">SmolVLA</span><span class="proj-tool">SO-101</span></div>
@@ -773,8 +807,8 @@ body.light .collab a{text-decoration-color:var(--blue)}
     </video></div>
         <div class="proj-body">
           <span class="proj-tag">YAICON &middot; 2025</span>
-          <div class="proj-title">DEXTRA &mdash; 12 DoF AMP Sim2Real</div>
-          <div class="proj-desc">Developed custom LSTM-based risk-assessment reward for Adversarial Motion Prior (AMP)-based policy training for natural gait emergence on a 12-DoF bipedal humanoid. Successfully deployed the learned locomotion policies on a physical Dynamixel-actuated platform.</div>
+          <div class="proj-title">DEXTRA<span class="pt-sub">12 DoF AMP Sim2Real</span></div>
+          <div class="proj-desc">Developed custom LSTM-based risk-assessment reward for Adversarial Motion Prior (AMP)-based policy training for natural gait emergence on a 12-DoF bipedal humanoid. Deployed the learned locomotion policies on a physical Dynamixel-actuated platform.</div>
           <div class="proj-awards"><span class="etag">YAICON 2nd Place</span></div>
           <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Isaac Lab</span><span class="proj-tool">Isaac Sim</span><span class="proj-tool">Dynamixel</span></div>
         </div>
@@ -783,7 +817,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
         <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/yaicon_yakemon.mp4" type="video/mp4"></video></div>
         <div class="proj-body">
           <span class="proj-tag">YAICON &middot; 2025</span>
-          <div class="proj-title"><a href="https://yakemon.netlify.app/battle" target="_blank" class="proj-title-link">YAKEMON - Pokemon Battle Agent</a></div>
+          <div class="proj-title"><a href="https://yakemon.netlify.app/battle" target="_blank" class="proj-title-link">YAKEMON<span class="pt-sub">Pok&eacute;mon Battle Agent</span></a></div>
           <div class="proj-desc">Developed a custom Pok&eacute;mon battle agent trained through self-play reinforcement learning with 96-dim state encoding. Compared DQN, Dueling-DDQN, and PPO agents, with the Dueling-DDQN reaching a 91% peak win rate against the baseline while showing ability to exploit type matchups.</div>
           <div class="proj-awards"><span class="etag">Member's Choice Award</span></div>
           <div class="proj-tools"><span class="proj-tool">PyTorch</span><span class="proj-tool">Python</span></div>
@@ -795,7 +829,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
     </video></div>
         <div class="proj-body">
           <span class="proj-tag">MEU4300 Creative Product Design &middot; 2025</span>
-          <div class="proj-title">Dr. CHA &mdash; Wheelchair Wheel Cleaner</div>
+          <div class="proj-title">Dr. CHA<span class="pt-sub">Wheelchair Wheel Cleaner</span></div>
           <div class="proj-desc">Led development of an app-controlled autonomous wheelchair wheel cleaning robot with vision-guided positioning and mobile app interface. Contributed across design, modeling, control, Convolutional Neural Network implementation and app integration.</div>
           <div class="proj-awards"><span class="etag">Creative Coursework Achievement Award</span></div>
           <div class="proj-tools"><span class="proj-tool">TensorFlow</span><span class="proj-tool">Arduino</span><span class="proj-tool">React</span><span class="proj-tool">SolidWorks</span></div>
@@ -807,7 +841,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
     </video></div>
         <div class="proj-body">
           <span class="proj-tag">MEU5059 Human Robotics &middot; 2025</span>
-          <div class="proj-title">Bibliobot &mdash; Library Assistant Robot</div>
+          <div class="proj-title">Bibliobot<span class="pt-sub">Library Assistant Robot</span></div>
           <div class="proj-desc">Designed a library assistant robot with a 5-DoF end-effector and derived forward and inverse kinematics for autonomous book retrieval. Developed a hierarchical control system spanning low-level joint control to safety-constrained trajectory planning.</div>
           <div class="proj-tools"><span class="proj-tool">MATLAB</span><span class="proj-tool">PyBullet</span><span class="proj-tool">Creo</span><span class="proj-tool">Autodesk Fusion</span></div>
         </div>
@@ -816,7 +850,7 @@ body.light .collab a{text-decoration-color:var(--blue)}
         <div class="proj-thumb"><video class="lv" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"><source src="video/hcair.mp4" type="video/mp4"></video></div>
         <div class="proj-body">
           <span class="proj-tag">HCAIR Lab Internship &nbsp;&middot;&nbsp; 2023</span>
-          <div class="proj-title">JET-Suit Evaluator - Jump Height Calculator</div>
+          <div class="proj-title">JET-Suit Evaluator<span class="pt-sub">Jump Height Calculator</span></div>
           <div class="proj-desc">Streamlined the data acquisition protocol for computing JET-Suit users&rsquo; jump height, reducing the setup from 55 motion tracking markers and about an hour of processing down to a single marker and 5 minutes using force plate data. Also implemented a Long Short-Term Memory network to predict ground reaction forces from joint kinematics and dynamics.</div>
           <div class="proj-awards"><span class="etag">HCAIR Lab Best Poster Award</span></div>
           <div class="proj-tools"><span class="proj-tool">Visual3D</span><span class="proj-tool">Qualisys</span><span class="proj-tool">Theia</span><span class="proj-tool">Python</span></div>
@@ -855,8 +889,8 @@ body.light .collab a{text-decoration-color:var(--blue)}
   <div class="section-inner">
     <h2 class="section-title">Awards</h2>
     <div class="award-list">
-      <div class="award-item"><span class="award-year">2026 &mdash; 2028</span><div><div class="award-name">Waldron Robotics Fellowship</div><div class="award-sub">Fully funded for 2 years</div></div><span class="award-org">University of California, Los Angeles</span></div>
-      <div class="award-item"><span class="award-year">2026 &mdash; 2031</span><div><div class="award-name">Kwanjeong Educational Foundation Fellowship</div><div class="award-sub">Funded a minimum of $25K annually for 5 years</div></div><span class="award-org">Kwanjeong Educational Foundation</span></div>
+      <div class="award-item"><span class="award-year">2026 &ndash; 2028</span><div><div class="award-name">Waldron Robotics Fellowship</div><div class="award-sub">Fully funded for 2 years</div></div><span class="award-org">University of California, Los Angeles</span></div>
+      <div class="award-item"><span class="award-year">2026 &ndash; 2031</span><div><div class="award-name">Kwanjeong Educational Foundation Fellowship</div><div class="award-sub">Funded a minimum of $25K annually for 5 years</div></div><span class="award-org">Kwanjeong Educational Foundation</span></div>
       <div class="award-item"><span class="award-year">Feb 2026</span><div><div class="award-name">Summa Cum Laude</div><div class="award-sub">Top 1% of cohort, College of Engineering</div></div><span class="award-org">Yonsei University</span></div>
       <div class="award-item"><span class="award-year">Spring 2025</span><div><div class="award-name">Creative Coursework Achievement Award</div><div class="award-sub">For Dr. CHA project</div></div><span class="award-org">Yonsei University</span></div>
       <div class="award-item"><span class="award-year">2019, 2024</span><div><div class="award-name">Jinri Scholarship</div><div class="award-sub">Merit-based placement scholarship for exceptional grades</div></div><span class="award-org">Yonsei University</span></div>
@@ -871,10 +905,10 @@ body.light .collab a{text-decoration-color:var(--blue)}
   <div class="section-inner">
     <h2 class="section-title">Extra Curricular</h2>
     <div class="award-list">
-      <div class="award-item"><span class="award-year">2026 &mdash; 2026</span><div><div class="award-name">Yonsei Drone</div><div class="award-sub">Mechanical Engineering Club &middot; attended ROS and drone control seminars; collected training data and implemented YOLO-based object detection on a fixed-wing UAV for the 24th Korea Robot Aircraft Competition</div></div><span class="award-org">Yonsei University</span></div>
-      <div class="award-item"><span class="award-year">2024 &mdash; 2026</span><div><div class="award-name">Yonsei Artificial Intelligence (YAI)</div><div class="award-sub">Academic Student Society &middot; was executive staff managing member attendance, seminar logistics, and club operations; led study groups on computer vision and reinforcement learning</div></div><span class="award-org">Yonsei University</span></div>
-      <div class="award-item"><span class="award-year">2020 &mdash; 2025</span><div><div class="award-name">Eagle Tutor</div><div class="award-sub">Tutoring Program &middot; tutored 32 undergraduate students across Engineering Mathematics I&ndash;IV and Mechanical Engineering Experiment I</div></div><span class="award-org">Yonsei University</span></div>
-      <div class="award-item"><span class="award-year">2020 &mdash; 2021</span><div><div class="award-name">RoboIn</div><div class="award-sub">Mechanical Engineering Club &middot; attended seminars on embedded systems and hardware design; designed a posture feedback cushion using a load cell array and built an SVM classifier for real-time sitting posture detection at the KU Medical Hackathon</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2026 &ndash; 2026</span><div><div class="award-name">Yonsei Drone</div><div class="award-sub">Mechanical Engineering Club &middot; attended ROS and drone control seminars; collected training data and implemented YOLO-based object detection on a fixed-wing UAV for the 24th Korea Robot Aircraft Competition</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2024 &ndash; 2026</span><div><div class="award-name">Yonsei Artificial Intelligence (YAI)</div><div class="award-sub">Academic Student Society &middot; was executive staff managing member attendance, seminar logistics, and club operations; led study groups on computer vision and reinforcement learning</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2020 &ndash; 2025</span><div><div class="award-name">Eagle Tutor</div><div class="award-sub">Tutoring Program &middot; tutored 32 undergraduate students across Engineering Mathematics I&ndash;IV and Mechanical Engineering Experiment I</div></div><span class="award-org">Yonsei University</span></div>
+      <div class="award-item"><span class="award-year">2020 &ndash; 2021</span><div><div class="award-name">RoboIn</div><div class="award-sub">Mechanical Engineering Club &middot; attended seminars on embedded systems and hardware design; designed a posture feedback cushion using a load cell array and built an SVM classifier for real-time sitting posture detection at the KU Medical Hackathon</div></div><span class="award-org">Yonsei University</span></div>
     </div>
   </div>
 </section>
@@ -920,18 +954,26 @@ function toggleAbs(id){var el=document.getElementById(id);el.style.display=el.st
           <rect class="ln" x="32" y="4" width="56" height="22"/><rect class="ln" x="32" y="144" width="56" height="22"/>
           <g id="formation"></g>
         </svg>
-        <div class="pitch-cap">I PLAY AT 10 · STYLE CLOSER TO VITINHA</div>
+        <div class="pitch-cap">I play at 10, closer to Vitinha in style</div>
       </div>
       <div class="lc">
-        <span class="sg-label">Albums on Repeat</span>
+        <span class="sg-label">Albums</span>
         <div class="tracks-wrap"><ol class="tracklist" id="tracks"></ol></div>
-        <span class="list-hint">SCROLL FOR MORE</span>
       </div>
       <div class="lc">
-        <span class="sg-label">Films I Love</span>
+        <span class="sg-label">Films</span>
         <div class="reel" id="reel"></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- COMMENTS -->
+<section class="section" id="comments">
+  <div class="section-inner">
+    <h2 class="section-title">Comments</h2>
+    <p class="cm-note">Questions about the work, corrections, or a hello. Sign in with GitHub to post, the thread is kept in this site&rsquo;s GitHub Discussions.</p>
+    <div id="giscus-box"><p class="cm-off">Comments are not switched on yet.</p></div>
   </div>
 </section>
 
@@ -1110,6 +1152,28 @@ var LIFE = {
     var inner='<div class="film-frame">'+face+'</div><div class="film-cap" title="'+esc(f.title)+'"><span>'+esc(f.title)+'</span><small>'+esc(f.meta||'')+'</small></div>';
     return f.link?'<a class="film" href="'+esc(f.link)+'" target="_blank" rel="noopener">'+inner+'</a>':'<div class="film">'+inner+'</div>';
   }).join('');
+})();
+</script>
+
+<script>
+(function(){
+  var G={repo:'davekim000323/davekim000323.github.io',repoId:'R_kgDOSFF1AQ',category:'General',categoryId:''};
+  var box=document.getElementById('giscus-box'); if(!box) return;
+  function theme(){var l=document.body.classList.contains('light');
+    if(location.protocol==='https:') return location.origin+'/giscus-'+(l?'light':'dark')+'.css';
+    return l?'light':'dark_dimmed';}
+  function load(){
+    if(!G.categoryId) return;
+    box.innerHTML='';
+    var s=document.createElement('script'); s.src='https://giscus.app/client.js'; s.async=true; s.crossOrigin='anonymous';
+    var a={repo:G.repo,'repo-id':G.repoId,category:G.category,'category-id':G.categoryId,mapping:'specific',term:'Guestbook',strict:'0','reactions-enabled':'1','emit-metadata':'0','input-position':'top',theme:theme(),lang:'en',loading:'lazy'};
+    for(var k in a) s.setAttribute('data-'+k,a[k]);
+    box.appendChild(s);
+  }
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();load();}},{rootMargin:'600px'});io.observe(box);} else load();
+  var b=document.getElementById('tbtn');
+  if(b) b.addEventListener('click',function(){setTimeout(function(){var f=document.querySelector('iframe.giscus-frame');
+    if(f) f.contentWindow.postMessage({giscus:{setConfig:{theme:theme()}}},'https://giscus.app');},0);});
 })();
 </script>
 </body></html>

@@ -1,0 +1,13 @@
+@import url('https://giscus.app/themes/dark.css');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+main{
+  --color-canvas-default:#0D0C0A;--color-canvas-overlay:#141210;--color-canvas-inset:#0D0C0A;--color-canvas-subtle:#1E1B18;
+  --color-border-default:rgba(255,255,255,.1);--color-border-muted:rgba(255,255,255,.07);
+  --color-fg-default:#F4F1E9;--color-fg-muted:rgba(244,241,233,.62);--color-fg-subtle:rgba(244,241,233,.46);
+  --color-accent-fg:#FFD100;--color-accent-emphasis:#2774AE;--color-accent-muted:rgba(255,209,0,.4);--color-accent-subtle:rgba(255,209,0,.08);
+  --color-btn-bg:#1E1B18;--color-btn-border:rgba(255,255,255,.14);--color-btn-hover-bg:#26221E;--color-btn-hover-border:rgba(255,209,0,.5);
+  --color-btn-primary-bg:#2774AE;--color-btn-primary-hover-bg:#2f84c4;--color-btn-primary-text:#fff;
+  font-family:'Hanken Grotesk',system-ui,sans-serif;
+}
+main *{border-radius:0!important}
+main .gsc-comments-count,main .gsc-reactions-count{font-family:'DM Mono',monospace;letter-spacing:.04em}
