@@ -564,11 +564,20 @@ html.light .m3d.mini figcaption{color:rgba(0,0,0,.55)}
 .m3d.probing .probe{opacity:1}
 @media (prefers-reduced-motion:reduce){.lid{display:none}}
 @media (max-width:560px){.brand span{display:none}.nav-links{gap:12px;font-size:12.5px}}
+
+/* ================= v7 ================= */
+.brand span{font-family:var(--display);font-size:24px;letter-spacing:-.005em}
+.brand span i{font-style:italic;color:var(--muted);font-size:.8em}
+.hall h1{margin-bottom:18px}
+.role{font-stretch:85%;font-size:15px;letter-spacing:.02em;color:var(--hl);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.role::before{content:'';width:28px;height:1px;background:currentColor}
+.h-intro{font-size:16.5px;line-height:1.65;color:var(--sub);max-width:520px;margin-bottom:28px}
+@media (max-width:560px){.brand span i{display:none}}
 </style></head>
 <body><div id="ch"></div><div id="cv"></div>
 
 <header class="nav"><div class="wrap nav-in">
-  <a href="#top" class="brand" aria-label="Back to top"><svg class="mark" viewBox="0 0 66 40" aria-hidden="true"><path d="M5 4v32M5 4h11a16 16 0 0 1 0 32H5" fill="none" stroke="currentColor" stroke-width="4"/><path d="M40 4v32M60 4 44 20l16 16" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="miter"/><circle class="j" cx="44" cy="20" r="4.6"/></svg><span>Dave Kim</span></a>
+  <a href="#top" class="brand" aria-label="Back to top"><span>Dave <i>(Hyeonjung)</i> Kim</span></a>
   <ul class="nav-links">
     <li><a href="#research">Research</a></li><li><a href="#projects">Projects</a></li><li class="opt"><a href="#skills">Skills</a></li><li class="opt"><a href="#awards">Awards</a></li><li class="opt"><a href="#ec">E.C.</a></li><li><a href="#life">OtL</a></li><li><a href="#cv-section">CV</a></li>
     <li><button class="tbtn" id="tbtn" aria-label="Switch light or dark"><svg id="ticon" width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button></li>
@@ -579,21 +588,20 @@ html.light .m3d.mini figcaption{color:rgba(0,0,0,.55)}
 <section class="hall" id="hall">
   <div class="wrap hall-in">
     <div class="h-text rv">
-      <p class="eyebrow">Ph.D. Student, UCLA</p>
       <h1><span>Dave</span><span>Kim</span></h1>
+      <p class="role">Ph.D. Student, UCLA</p>
+      <p class="h-intro">I design and control robot hands that can safely and dexterously interact with unstructured environments, from the mechanism itself to control for safe physical interaction and robot learning for dexterous manipulation.</p>
       <ul class="interests">
         <li><svg viewBox="0 0 36 32" fill="none"><path d="M6 13 L20 10 L25 13 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 13 L6 19 L11 22 L11 16 Z" stroke="currentColor" stroke-width="1.2"/><path d="M11 16 L25 13 L25 19 L11 22 Z" stroke="currentColor" stroke-width="1.2"/><line x1="22" y1="11.5" x2="22" y2="7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="17" y="5" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.1"/><polyline points="6,19 4,23 5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,22 9.5,26 10.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="25,19 27,23 26,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,22 21.5,26 20.5,29" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>01</b>Bioinspired Robot Design</span></li>
         <li><svg viewBox="0 0 32 34" fill="none"><g><path d="M16 3 L23 7 L16 11 L9 7 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M23 7 L23 15 L16 19 L16 11 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9 7 L16 11 L16 19 L9 15 Z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></g><rect x="8.5" y="22" width="2" height="5" rx="1" stroke="currentColor" stroke-width="1.05"/><rect x="11" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><rect x="13.8" y="19.5" width="2.7" height="7.5" rx="1.35" stroke="currentColor" stroke-width="1.1"/><rect x="17" y="20.5" width="2.3" height="6.5" rx="1.15" stroke="currentColor" stroke-width="1.05"/><path d="M20.5 25 Q23.5 24 24.2 26 Q24.8 28.2 22.5 28.8 L20.5 28.2" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" fill="none"/><path d="M8.5 27 Q8 31 11 31 L20 31 Q22.5 31 22.5 28.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg><span><b>02</b>Physical Control</span></li>
         <li><svg viewBox="0 0 34 28" fill="none"><line class="nn-conn" x1="6" y1="5" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="5" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="14" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="8" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="14" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="6" y1="23" x2="17" y2="20" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="8" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="14" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="9" stroke="currentColor" stroke-width=".75" opacity=".38"/><line class="nn-conn" x1="17" y1="20" x2="28" y2="19" stroke="currentColor" stroke-width=".75" opacity=".38"/><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="6" cy="23" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="8" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="17" cy="20" r="2.2" stroke="currentColor" stroke-width="1.2" fill="var(--bg)"/><circle cx="28" cy="9" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/><circle cx="28" cy="19" r="2.5" stroke="currentColor" stroke-width="1.3" fill="var(--bg)"/></svg><span><b>03</b>Robot Learning</span></li>
       </ul>
     </div>
-    <figure class="stage m3d rv" id="stage" data-model="models/rtj-hand.glb" data-rot="0,0,-90" data-scale="1.55" data-spin="0.9">
+    <figure class="stage m3d rv" id="stage" data-model="models/rtj-hand.glb" data-rot="0,90,-90" data-scale="1.6" data-spin="0.9" data-sway>
       <div class="pool" aria-hidden="true"></div>
       <img class="fallback" src="images/rtj-open.webp" alt="Reinforced-tensegrity robot hand" decoding="async">
       <canvas aria-label="3D model of the reinforced-tensegrity robot hand. Drag to turn it."></canvas>
       <div class="probe" id="probe" aria-hidden="true"></div>
-      <p class="hint"><span>Drag to turn</span><span>Hover to probe a part</span><span>Double-click to reset</span></p>
-      <figcaption class="wall-text"><i>Reinforced-Tensegrity Joints for Safe, Dexterous Robot Hands</i><span>2026, in progress at UCLA</span><span>Tendon-driven hand, reinforced-tensegrity joints, impedance control</span></figcaption>
     </figure>
   </div>
 </section>
@@ -1202,10 +1210,10 @@ function pretty(n){
 }
 function material(name){
   const n=(name||'').toLowerCase();
-  if(/lens/.test(n))return new THREE.MeshPhysicalMaterial({color:0x2774AE,roughness:.32,metalness:.05,clearcoat:.6});
-  if(/prox|dist/.test(n))return new THREE.MeshStandardMaterial({color:0x8d9097,roughness:.34,metalness:.82});
-  if(/palm|cap|metacarpal|base|housing|core/.test(n))return new THREE.MeshStandardMaterial({color:0x2d2d31,roughness:.55,metalness:.12});
-  return new THREE.MeshStandardMaterial({color:0x1c1c1f,roughness:.48,metalness:.18});
+  if(/lens/.test(n))return new THREE.MeshPhysicalMaterial({color:0x2774AE,roughness:.3,metalness:.05,clearcoat:.6});
+  if(/prox|dist/.test(n))return new THREE.MeshStandardMaterial({color:0x6b7078,roughness:.32,metalness:.85});
+  if(/tendon/.test(n))return new THREE.MeshStandardMaterial({color:0xFFD100,roughness:.45,metalness:.1});
+  return new THREE.MeshStandardMaterial({color:0xDCD6C8,roughness:.62,metalness:0});
 }
 function hl(){return new THREE.Color(document.documentElement.classList.contains('light')?0x2774AE:0xFFD100)}
 function viewer(stage){
@@ -1226,7 +1234,7 @@ function viewer(stage){
   const rg=g.createRadialGradient(64,64,0,64,64,64);rg.addColorStop(0,'rgba(0,0,0,.5)');rg.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=rg;g.fillRect(0,0,128,128);
   const shadow=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc),transparent:true,depthWrite:false}));
   shadow.rotation.x=-Math.PI/2;scene.add(shadow);
-  let meshes=[],hover=null,raf=0,visible=false,ready=false,idle;const home={p:new THREE.Vector3(),t:new THREE.Vector3()};
+  let meshes=[],hover=null,raf=0,visible=false,ready=false,idle,piv=null,held=false;const sway=stage.hasAttribute('data-sway'),t0=performance.now();const home={p:new THREE.Vector3(),t:new THREE.Vector3()};
   function size(){const r=stage.getBoundingClientRect();if(!r.width)return;renderer.setSize(r.width,r.height,false);cam.aspect=r.width/r.height;cam.updateProjectionMatrix()}
   new ResizeObserver(size).observe(stage);size();
   loader.load(stage.dataset.model,function(gl){
@@ -1236,10 +1244,10 @@ function viewer(stage){
       let geo=o.geometry;if(!geo.attributes.normal){geo=toCreasedNormals(geo,Math.PI/5.5);o.geometry=geo}
       o.material=material(o.name||(o.parent&&o.parent.name));o.userData.e=o.material.emissive.clone();meshes.push(o)}});
     const box=new THREE.Box3().setFromObject(root),s=new THREE.Vector3(),c=new THREE.Vector3();box.getSize(s);box.getCenter(c);
-    const k=(+stage.dataset.scale||2)/Math.max(s.x,s.y,s.z),piv=new THREE.Group();
+    const k=(+stage.dataset.scale||2)/Math.max(s.x,s.y,s.z);piv=new THREE.Group();
     root.position.sub(c);piv.add(root);piv.scale.setScalar(k);scene.add(piv);
     const h=s.y*k;piv.position.y=h/2;shadow.scale.set(s.x*k*1.5,s.z*k*1.5+.3,1);
-    ctl.target.set(0,h/2,0);cam.position.set(2.3,h/2+1.2,4.8);ctl.update();home.p.copy(cam.position);home.t.copy(ctl.target);
+    ctl.target.set(0,h/2,0);if(sway){ctl.autoRotate=false;cam.position.set(0,h/2+.45,5.6)}else cam.position.set(2.3,h/2+1.2,4.8);ctl.update();home.p.copy(cam.position);home.t.copy(ctl.target);
     ready=true;stage.classList.add('ready');if(visible)loop();
   },undefined,function(){stage.classList.add('fail');renderer.dispose()});
   const ray=new THREE.Raycaster(),m=new THREE.Vector2(9,9);let px=0,py=0,dirty=false;
@@ -1252,10 +1260,10 @@ function viewer(stage){
       stage.classList.toggle('probing',!!o)}
     if(o&&probe)probe.style.transform='translate('+(px+16)+'px,'+(py+14)+'px)';
   }
-  ctl.addEventListener('start',function(){ctl.autoRotate=false;clearTimeout(idle)});
-  ctl.addEventListener('end',function(){clearTimeout(idle);if(!reduce)idle=setTimeout(function(){ctl.autoRotate=true},4000)});
+  ctl.addEventListener('start',function(){ctl.autoRotate=false;held=true;clearTimeout(idle)});
+  ctl.addEventListener('end',function(){clearTimeout(idle);if(!reduce)idle=setTimeout(function(){if(sway){held=false;cam.position.copy(home.p);ctl.target.copy(home.t)}else ctl.autoRotate=true},4000)});
   canvas.addEventListener('dblclick',function(){cam.position.copy(home.p);ctl.target.copy(home.t);ctl.update()});
-  function loop(){cancelAnimationFrame(raf);(function f(){if(!visible)return;ctl.update();if(dirty){pick();dirty=false}renderer.render(scene,cam);raf=requestAnimationFrame(f)})()}
+  function loop(){cancelAnimationFrame(raf);(function f(){if(!visible)return;if(sway&&piv&&!held&&!reduce)piv.rotation.y=Math.sin((performance.now()-t0)/1000*.55)*.38;ctl.update();if(dirty){pick();dirty=false}renderer.render(scene,cam);raf=requestAnimationFrame(f)})()}
   new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible&&ready)loop()}).observe(stage);
 }
 /* the hero loads at once, the gallery pieces load when they come near */
