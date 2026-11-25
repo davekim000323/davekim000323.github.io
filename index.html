@@ -635,6 +635,16 @@ html.light{--name:#2774AE}
  .duo-name{font-size:31vw;margin-bottom:22px}
  .duo .hero3d{height:64vh;min-height:420px;order:2}
 }
+
+/* ================= name and face card ================= */
+.duo-text{--nf:clamp(92px,9.6vw,164px);--col:min(100%,580px)}
+.duo-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;width:var(--col);margin-bottom:34px}
+.duo-name{font-size:var(--nf);margin:0 0 0 -.04em}
+.duo-head .stack{height:calc(var(--nf)*1.6 - 6px);width:auto;aspect-ratio:413/531;margin:0;flex:none}
+.duo .h-intro,.duo .interests{max-width:none;width:var(--col)}
+.intro-grid{grid-template-columns:minmax(0,1fr) 300px}
+@media (max-width:1100px){.intro-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.duo-text{--nf:24vw}.duo-head{width:100%;padding-right:14px}.duo-head .stack{height:calc(var(--nf)*1.42)}.atrium.duo{overflow-x:clip}}
 </style></head>
 <body><div id="ch"></div><div id="cv"></div>
 
@@ -650,7 +660,11 @@ html.light{--name:#2774AE}
 <section class="atrium duo" id="hall">
   <div class="wrap duo-in">
     <div class="duo-text">
-      <h1 class="duo-name"><span>Dave</span><span>Kim</span></h1>
+      <div class="duo-head"><h1 class="duo-name"><span>Dave</span><span>Kim</span></h1><button type="button" class="stack" id="portrait" aria-label="Open photos, 3 images">
+      <figure class="print p3" aria-hidden="true"><img src="images/portrait-3.jpg" alt="" loading="lazy"><figcaption>With friends<span>3</span></figcaption></figure>
+      <figure class="print p2" aria-hidden="true"><img src="images/portrait-2.jpg" alt="" loading="lazy"><figcaption>Commencement<span>2</span></figcaption></figure>
+      <figure class="print p1"><img src="images/portrait-1.jpg" alt="Dave (Hyeonjung) Kim"><figcaption>Dave, 2026<span>1 / 3</span></figcaption></figure>
+    </button></div>
       <p class="role">Ph.D. Student, UCLA</p>
       <p class="h-intro">I design and control robot hands that can safely and dexterously interact with unstructured environments, from the mechanism itself to control for safe physical interaction and robot learning for dexterous manipulation.</p>
       <ol class="interests">
@@ -670,14 +684,7 @@ html.light{--name:#2774AE}
 
 <section class="wrap intro" id="about">
   <div class="intro-grid rv">
-    <div class="stack-wrap">
-    <button type="button" class="stack" id="portrait" aria-label="Open photos, 3 images">
-      <figure class="print p3" aria-hidden="true"><img src="images/portrait-3.jpg" alt="" loading="lazy"><figcaption>With friends<span>3</span></figcaption></figure>
-      <figure class="print p2" aria-hidden="true"><img src="images/portrait-2.jpg" alt="" loading="lazy"><figcaption>Commencement<span>2</span></figcaption></figure>
-      <figure class="print p1"><img src="images/portrait-1.jpg" alt="Dave (Hyeonjung) Kim"><figcaption>Dave, 2026<span>1 / 3</span></figcaption></figure>
-    </button>
-    <p class="cap-note"><i></i>Click the photo for more</p>
-  </div>
+    
 
   
     <div class="intro-text">
